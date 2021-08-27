@@ -7,10 +7,6 @@ cc_library {
     static_libs: ["libgptutils.lenovo_J706F"],
 }
 
-package {
-    default_applicable_licenses: ["hardware_qcom_bootctrl_license"],
-}
-
 // Added automatically by a large-scale-change
 // See: http://go/android-license-faq
 license {
