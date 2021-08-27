@@ -1,6 +1,4 @@
 ro.display.series=Lenovo TB-J706F
 ro.product.board=sm6150
 ro.board.platform=sm6150
-ro.build.version.release=10
-ro.build.version.security_patch=2099-12-31
 vendor.gatekeeper.disable_spu=true
