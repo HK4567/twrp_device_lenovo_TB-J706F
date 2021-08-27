@@ -42,7 +42,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sm6150 \
-    libgptutils.lenovoJ706F \
+    libgptutils \
     libz \
     libcutils
 
