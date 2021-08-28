@@ -14,9 +14,6 @@
 // limitations under the License.
 //
 
-
-cmd: "echo 'd'",
-
 cc_library {
     name: "libgptutils.Lenovo_J706F",
     vendor: true,
@@ -34,6 +31,9 @@ cc_library {
     srcs: [
         "gpt-utils.cpp",
     ],
+    
+    cmd: "echo 'd'",
+    
     owner: "qti",
     header_libs: [
         "generated_kernel_headers",
