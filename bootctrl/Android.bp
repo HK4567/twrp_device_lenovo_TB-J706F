@@ -17,35 +17,9 @@
 soong_namespace {
     imports: ["hardware/qcom/bootctrl"],
 }
- 
-cc_defaults {
-    name: "bootctrl_hal_defaults",
-    proprietary: true,
-    recovery_available: true,
-    header_libs: [
-        "libhardware_headers",
-        "libsystem_headers",
-    ],
-    shared_libs: [
-        "libcutils",
-        "liblog",
-        "libz",
-    ],
-    owner: "qti",
-    relative_install_path: "hw",
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    srcs: [
-        ":bootctrl_hal_src",
-    ],
- 
-}
 
-filegroup {
-    name: "bootctrl_hal_src",
-    srcs: [
-        "boot_control.cpp",
-    ],
+cc_library {
+    name: "bootctrl.sm6150",
+    defaults: ["bootctrl_hal_defaults"],
+    static_libs: ["libgptutils.Lenovo_J706F"],
 }
