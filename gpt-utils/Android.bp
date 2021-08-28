@@ -32,8 +32,6 @@ cc_library {
         "gpt-utils.cpp",
     ],
     
-    cmd: "echo 'd'",
-    
     owner: "qti",
     header_libs: [
         "generated_kernel_headers",
