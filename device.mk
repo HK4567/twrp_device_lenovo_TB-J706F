@@ -1,5 +1,8 @@
 LOCAL_PATH := device/lenovo/J706F
 
+# define hardware platform
+PRODUCT_PLATFORM := sm6150
+
 # A/B
 AB_OTA_PARTITIONS += \
     boot \
@@ -34,3 +37,7 @@ PRODUCT_PACKAGES += \
     update_engine \
     update_verifier \
     update_engine_sideload
+
+# Soong namespaces
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)
