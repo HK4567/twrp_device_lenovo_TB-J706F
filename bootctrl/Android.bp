@@ -14,6 +14,9 @@
 // limitations under the License.
 //
 
+soong_namespace {
+}
+
 cc_library {
     name: "bootctrl.sm6150",
     defaults: ["bootctrl_hal_defaults"],
