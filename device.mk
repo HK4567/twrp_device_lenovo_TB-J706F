@@ -3,12 +3,6 @@ LOCAL_PATH := device/Lenovo/J706F
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
-# A/B
-AB_OTA_PARTITIONS += \
-    boot \
-    system \
-    vendor
-
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -19,12 +13,10 @@ AB_OTA_POSTINSTALL_CONFIG += \
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-service \
-    android.hardware.boot@1.0-impl-wrapper.recovery \
-    android.hardware.boot@1.0-impl-wrapper \
-    android.hardware.boot@1.0-impl-recovery \
-    bootctrl.sm6150 \
-    bootctrl.sm6150.recovery
 
+PRODUCT_PACKAGES += \
+    bootctrl.sm6150
+    
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sm6150 \
     libgptutils.Lenovo_J706F \
