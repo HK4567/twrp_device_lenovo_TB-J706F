@@ -1,0 +1,8 @@
+[
+  {
+    "remote":      "HK4567",
+    "repository":  "twrp_device_j706f",
+    "target_path": "device/Lenovo/J706F",
+    "revision":    "android-10"
+  }
+]
