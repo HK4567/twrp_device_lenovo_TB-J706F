@@ -44,3 +44,10 @@ cc_defaults {
     ],
  
 }
+
+filegroup {
+    name: "bootctrl_hal_src",
+    srcs: [
+        "boot_control.cpp",
+    ],
+}
