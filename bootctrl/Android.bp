@@ -19,13 +19,6 @@ cc_library {
     defaults: ["bootctrl_hal_defaults"],
     static_libs: ["libgptutils.lenovo_J706F"],
 }
-
-filegroup {
-    name: "bootctrl_hal_src",
-    srcs: [
-        "boot_control.cpp",
-    ],
-}
  
 cc_defaults {
     name: "bootctrl_hal_defaults",
