@@ -17,12 +17,6 @@
 soong_namespace {
     imports: ["hardware/qcom/bootctrl"],
 }
-
-cc_library {
-    name: "bootctrl.sm6150",
-    defaults: ["bootctrl_hal_defaults"],
-    static_libs: ["libgptutils.Lenovo_J706F"],
-}
  
 cc_defaults {
     name: "bootctrl_hal_defaults",
