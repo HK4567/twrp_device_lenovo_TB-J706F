@@ -23,7 +23,7 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl-wrapper \
     android.hardware.boot@1.0-impl-recovery \
     bootctrl.sm6150 \
-    bootctrl.sm6150.recovery \
+    bootctrl.sm6150.recovery
 
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sm6150 \
@@ -45,3 +45,5 @@ PRODUCT_HOST_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)    
