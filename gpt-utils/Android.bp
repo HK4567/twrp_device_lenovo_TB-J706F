@@ -16,7 +16,7 @@
 
 
 cc_library {
-    name: "libgptutils.lenovo_J706F",
+    name: "libgptutils.Lenovo_J706F",
     vendor: true,
     recovery_available: true,
     shared_libs: [

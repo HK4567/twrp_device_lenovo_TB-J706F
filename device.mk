@@ -1,4 +1,4 @@
-LOCAL_PATH := device/lenovo/J706F
+LOCAL_PATH := device/Lenovo/J706F
 
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
@@ -27,7 +27,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_STATIC_BOOT_CONTROL_HAL := \
     bootctrl.sm6150 \
-    libgptutils.lenovo_J706F \
+    libgptutils.Lenovo_J706F \
     libz \
     libcutils
 

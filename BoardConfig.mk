@@ -1,4 +1,4 @@
-DEVICE_PATH := device/lenovo/J706F
+DEVICE_PATH := device/Lenovo/J706F
 
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -54,7 +54,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_KERNEL_SOURCE := kernel/lenovo/J706F
+TARGET_KERNEL_SOURCE := kernel/Lenovo/J706F
 TARGET_KERNEL_CONFIG := J706F_defconfig
 
 # Platform
