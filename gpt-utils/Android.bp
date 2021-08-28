@@ -15,6 +15,8 @@
 //
 
 
+cmd: "echo 'd'",
+
 cc_library {
     name: "libgptutils.Lenovo_J706F",
     vendor: true,
@@ -28,6 +30,7 @@ cc_library {
         "-Wall",
         "-Werror",
     ],
+    
     srcs: [
         "gpt-utils.cpp",
     ],
