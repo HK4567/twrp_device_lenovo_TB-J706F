@@ -122,7 +122,7 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
+TARGET_RECOVERY_WIPE := device/Lenovo/J706F/recovery.wipe
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # Hack: prevent anti rollback
