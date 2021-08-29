@@ -4,6 +4,8 @@ LOCAL_PATH := device/Lenovo/J706F
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
+
 AB_OTA_POSTINSTALL_CONFIG += \
     RUN_POSTINSTALL_system=true \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
@@ -38,4 +40,4 @@ PRODUCT_HOST_PACKAGES += \
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
 
-PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
+# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
