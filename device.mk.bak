@@ -30,6 +30,12 @@ PRODUCT_PACKAGES += \
     bootctrl.sm6150 \
     bootctrl.sm6150.recovery
     
+PRODUCT_STATIC_BOOT_CONTROL_HAL := \
+    bootctrl.sm6150 \
+    libgptutils.J706F \
+    libz \
+    libcutils
+
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
     

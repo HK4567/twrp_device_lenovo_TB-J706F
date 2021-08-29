@@ -16,11 +16,14 @@
 # limitations under the License.
 #
 
+PRODUCT_RELEASE_NAME := Lenovo Lenovo TB-J706F
+
 # Inherit from those products. Most specific first.
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product-if-exists, $(SRC_TARGET_DIR)/product/embedded.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
+$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 
 # Inherit from J706F device
 $(call inherit-product, device/Lenovo/J706F/device.mk)
@@ -32,4 +35,13 @@ PRODUCT_NAME := omni_J706F
 PRODUCT_BRAND := Lenovo
 PRODUCT_MODEL := Lenovo TB-J706F
 PRODUCT_MANUFACTURER := Lenovo
-PRODUCT_RELEASE_NAME := Lenovo Lenovo TB-J706F
+
+PRODUCT_BUILD_PROP_OVERRIDES += \
+    PRODUCT_NAME=J706F \
+    BUILD_PRODUCT=J706F \
+    TARGET_DEVICE=J706F
+ 
+# HACK: Set vendor patch level
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.vendor.build.security_patch=2099-12-31    
+    
