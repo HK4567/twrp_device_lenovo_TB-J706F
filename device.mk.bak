@@ -1,8 +1,6 @@
 
 LOCAL_PATH := device/Lenovo/J706F
 
-LOCAL_C_INCLUDES
-
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
