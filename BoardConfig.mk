@@ -74,6 +74,7 @@ TARGET_NO_RECOVERY := false
 BOARD_USES_RECOVERY_AS_BOOT := false
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_HAS_LARGE_FILESYSTEM := true
+BOARD_HAS_NO_SELECT_BUTTON := true
 #BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
@@ -86,6 +87,7 @@ USE_COMMON_BOOTCTRL := false
 # A/B
 AB_OTA_UPDATER := true
 TW_INCLUDE_REPACKTOOLS := true
+TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket androidboot.selinux=permissive androidboot.boot_devices=soc/1d84000.ufshc buildvariant=eng
@@ -120,6 +122,7 @@ TARGET_USES_MKE2FS := true
 # Recovery
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+TARGET_RECOVERY_QCOM_RTC_FIX := true
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := device/Lenovo/J706F/recovery.wipe
@@ -142,4 +145,8 @@ TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_USE_TOOLBOX := true
 TW_HAS_EDL_MODE := true
 TW_USE_TOOLBOX := true
-TW_EXTRA_LANGUAGES := ture
+TW_EXCLUDE_SUPERSU := true
+TW_INCLUDE_NTFS_3G := true
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+TW_HAS_DOWNLOAD_MODE := true
+TW_NO_SCREEN_BLANK := true
