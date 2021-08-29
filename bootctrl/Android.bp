@@ -20,5 +20,5 @@ soong_namespace {
 cc_library {
     name: "bootctrl.sm6150",
     defaults: ["bootctrl_hal_defaults"],
-    static_libs: ["libgptutils.Lenovo_J706F"],
+    static_libs: ["libgptutils.J706F"],
 }
