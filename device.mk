@@ -1,3 +1,4 @@
+
 LOCAL_PATH := device/Lenovo/J706F
 
 # define hardware platform
@@ -30,10 +31,11 @@ PRODUCT_PACKAGES += \
     update_verifier \
     update_engine_sideload
 
-# Recovery - Modules
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)

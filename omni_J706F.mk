@@ -24,10 +24,7 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
 # Inherit from J706F device
 $(call inherit-product, device/Lenovo/J706F/device.mk)
-
-# Inherit some common Omni stuff.
 $(call inherit-product, vendor/omni/config/common.mk)
-$(call inherit-product, vendor/omni/config/gsm.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := J706F
