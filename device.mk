@@ -1,11 +1,22 @@
-
 LOCAL_PATH := device/Lenovo/J706F
 
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
+# A/B
+AB_OTA_UPDATER := true
 
+AB_OTA_PARTITIONS += \
+    boot \
+    recovery \
+    system \
+    vendor \
+    vbmeta \
+    product \
+    dtbo 
+
+TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
+   
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -32,6 +43,8 @@ PRODUCT_PACKAGES += \
     
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
+
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \

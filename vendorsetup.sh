@@ -51,7 +51,5 @@ export FOX_USE_TAR_BINARY="1"
 export FOX_ASH_IS_BASH="1"
 export FOX_REPLACE_BUSYBOX_PS="1"
 export FOX_USE_BASH_SHELL="1"
-export FOX_USE_LZMA_COMPRESSION="1"
-export FOX_USE_NANO_EDITOR="1"
  
 add_lunch_combo omni_J706F-eng
