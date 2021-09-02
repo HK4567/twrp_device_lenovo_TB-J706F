@@ -112,7 +112,7 @@ TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery/root/etc/recovery.wipe
+TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery/root/system_root/system/etc/recovery.wipe
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # Hack: prevent anti rollback
