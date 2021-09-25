@@ -22,9 +22,9 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
-
-LOCAL_PATH := device/Lenovo/J706F
  
+LOCAL_PATH := device/Lenovo/J706F
+
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
 

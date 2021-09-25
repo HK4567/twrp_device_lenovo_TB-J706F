@@ -1,5 +1,5 @@
+
 # define hardware platform
-LOCAL_PATH := device/Lenovo/J706F
 PRODUCT_PLATFORM := sm6150
 
 # A/B
@@ -47,4 +47,6 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)
+    $(DEVICE_PATH)
+
+# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
