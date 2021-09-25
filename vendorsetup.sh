@@ -109,3 +109,5 @@ if [ "$1" = "$FDEVICE" -o "$FOX_BUILD_DEVICE" = "$FDEVICE" ]; then
 
 fi
 #
+add_lunch_combo omni_J706F-userdebug
+add_lunch_combo omni_J706F-eng
