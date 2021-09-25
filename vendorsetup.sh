@@ -28,4 +28,4 @@ export OF_QUICK_BACKUP_LIST="/boot;/data;/system_image;/vendor_image;"
 # export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER="1"
 # export FOX_R11=1
 # export FOX_ADVANCED_SECURITY=1 
-add_lunch_combo omni_J706F-eng
+# add_lunch_combo omni_J706F-eng
