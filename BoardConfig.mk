@@ -22,6 +22,8 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
+
+LOCAL_PATH := device/Lenovo/J706F
  
 # For building with minimal manifest
 ALLOW_MISSING_DEPENDENCIES := true
@@ -65,9 +67,9 @@ BOARD_RAMDISK_OFFSET := 0x01000000
 
 TARGET_KERNEL_ARCH := arm64
 TARGET_KERNEL_HEADER_ARCH := arm64
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
+BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
@@ -110,7 +112,7 @@ TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
 BOARD_FLASH_BLOCK_SIZE := 262144
 
 # Hack: prevent anti rollback
