@@ -1,3 +1,5 @@
+DEVICE_PATH := device/Lenovo/J706F
+
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
@@ -7,6 +9,7 @@ PRODUCT_PLATFORM := sm6150
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
+    cppreopts.sh \
     update_engine \
     update_verifier \
     update_engine_sideload
