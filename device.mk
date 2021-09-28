@@ -1,25 +1,12 @@
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
-# A/B
-AB_OTA_UPDATER := true
-
-AB_OTA_PARTITIONS += \
-    boot \
-    recovery \
-    system \
-    vendor \
-    vbmeta \
-    product \
-    dtbo 
-
-TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
-   
 # A/B support
 PRODUCT_PACKAGES += \
     otapreopt_script \
-    cppreopts.sh \
     update_engine \
     update_verifier \
     update_engine_sideload
@@ -30,6 +17,11 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
     
+# fastbootd
+PRODUCT_PACKAGES += \
+    android.hardware.fastboot@1.0-impl-mock \
+    fastbootd
+        
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl \
@@ -42,11 +34,7 @@ PRODUCT_PACKAGES += \
     
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
-
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(DEVICE_PATH)
-
-# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
