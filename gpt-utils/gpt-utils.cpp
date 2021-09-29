@@ -64,10 +64,10 @@
 /* list the names of the backed-up partitions to be swapped */
 /* extension used for the backup partitions - tzbak, abootbak, etc. */
 #define BAK_PTN_NAME_EXT    "bak"
-#define XBL_PRIMARY         "/dev/block/platform/soc/1d84000.ufshc/by-name/xbl"
-#define XBL_BACKUP          "/dev/block/platform/soc/1d84000.ufshc/by-name/xblbak"
-#define XBL_AB_PRIMARY      "/dev/block/platform/soc/1d84000.ufshc/by-name/xbl_a"
-#define XBL_AB_SECONDARY    "/dev/block/platform/soc/1d84000.ufshc/by-name/xbl_b"
+#define XBL_PRIMARY         "/dev/block/bootdevice/by-name/xbl"
+#define XBL_BACKUP          "/dev/block/bootdevice/by-name/xblbak"
+#define XBL_AB_PRIMARY      "/dev/block/bootdevice/by-name/xbl_a"
+#define XBL_AB_SECONDARY    "/dev/block/bootdevice/by-name/xbl_b"
 /* GPT defines */
 #define MAX_LUNS                    26
 //Size of the buffer that needs to be passed to the UFS ioctl
@@ -1049,7 +1049,7 @@ int prepare_boot_update(enum boot_update_stage stage)
 
 //Given a parttion name(eg: rpm) get the path to the block device that
 //represents the GPT disk the partition resides on. In the case of emmc it
-//would be the default emmc dev(/dev/mmcblk0). In the case of UFS we look
+//would be the default emmc dev(/dev/block/mmcblk0). In the case of UFS we look
 //through the /dev/block/bootdevice/by-name/ tree for partname, and resolve
 //the path to the LUN from there.
 static int get_dev_path_from_partition_name(const char *partname,
@@ -1071,14 +1071,21 @@ static int get_dev_path_from_partition_name(const char *partname,
                 if (stat(path, &st)) {
                         goto error;
                 }
-                if (readlink(path, buf, buflen) < 0)
-                {
+                char resolved[PATH_MAX] = {0};
+                if (!realpath(path, resolved)) {
+                        ALOGE("%s: Cannot find realpath for %s", __func__, path);
                         goto error;
-                } else {
-                        buf[PATH_TRUNCATE_LOC] = '\0';
                 }
+                int pos = (int)strlen(resolved) - 1;
+                while (pos >= 0 && isdigit(resolved[pos])) pos--;
+                resolved[pos + 1] = '\0';
+                if (buflen < pos + 2) {
+                        ALOGE("%s: Insufficient buffer to hold %s", __func__, resolved);
+                        goto error;
+                }
+                strncpy(buf, resolved, buflen);
         } else {
-                snprintf(buf, buflen, "/dev/mmcblk0");
+                snprintf(buf, buflen, BLK_DEV_FILE);
         }
         return 0;
 
