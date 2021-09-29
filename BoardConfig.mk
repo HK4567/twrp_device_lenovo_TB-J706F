@@ -37,6 +37,7 @@ TARGET_2ND_ARCH_VARIANT := armv8-a
 TARGET_2ND_CPU_ABI := armeabi-v7a
 TARGET_2ND_CPU_ABI2 := armeabi
 TARGET_2ND_CPU_VARIANT := cortex-a73
+TARGET_USES_64_BIT_BINDER := true
 
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
@@ -102,29 +103,24 @@ BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 TARGET_OTA_ASSERT_DEVICE := J706F
 
 # Partitions
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
-BOARD_DTBOIMG_PARTITION_SIZE := 25165824
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
-BOARD_SYSTEMIMAGE_PARTITION := ext4
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 109553106616
 
-# Reserve space for data encryption (109553123000-16384)
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
-BOARD_PRODUCTIMAGE_PARTITION_TYPE := ext4
+# File systems
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true 
+
+# Workaround for error copying vendor files to recovery ramdisk
+BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+TARGET_COPY_OUT_VENDOR := vendor
 
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
 BOARD_SUPER_PARTITION_GROUPS := somc_dynamic_partitions
 BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
-BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := \
-      product \
-      system \
-      vendor
+BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system vendor
 
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := false
@@ -133,12 +129,6 @@ BOARD_USES_RECOVERY_AS_BOOT := false
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
-
-# Workaround for error copying vendor files to recovery ramdisk
-BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_PRODUCT := product
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -162,16 +152,10 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_NO_SCREEN_BLANK := true
 TW_USE_TOOLBOX := true
-AB_OTA_UPDATER := true
 
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
-
-# tell update_engine to not change dynamic partition table during updates
-# needed since our qti_dynamic_partitions does not include
-# vendor and odm and we also dont want to AB update them
-TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
-
+    
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
