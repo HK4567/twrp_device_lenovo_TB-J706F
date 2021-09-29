@@ -40,7 +40,6 @@ TARGET_2ND_CPU_VARIANT := cortex-a73
 
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
-TARGET_USES_64_BIT_BINDER := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sm6150
@@ -48,12 +47,26 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 QCOM_BOARD_PLATFORMS += sm6150
 
 # Bootloader
+PRODUCT_PLATFORM := sm6150
 TARGET_BOOTLOADER_BOARD_NAME := sm6150
 TARGET_NO_BOOTLOADER := true
-BUILD_BROKEN_DUP_RULES := true
+TARGET_USES_UEFI := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket androidboot.selinux=permissive androidboot.boot_devices=soc/1d84000.ufshc buildvariant=eng
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
+                               androidboot.memcg=1 \
+                               lpm_levels.sleep_disabled=1 \
+                               video=vfb:640x400,bpp=32,memsize=3072000 \
+                               msm_rtb.filter=0x237 \
+                               service_locator.enable=1 \
+                               swiotlb=1 \
+                               androidboot.usbcontroller=a600000.dwc3 \
+                               earlycon=msm_geni_serial,0x880000 \
+                               loop.max_part=7 \
+                               cgroup.memory=nokmem,nosocket \
+                               androidboot.boot_devices=soc/1d84000.ufshc \
+                               buildvariant=eng
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_BOOTIMG_HEADER_VERSION := 2
@@ -80,7 +93,6 @@ BOARD_DTB_OFFSET           := 0x01f00000
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 
-TARGET_COPY_OUT_PRODUCT := product
 
 # Kenel recovery dtbo
 BOARD_INCLUDE_RECOVERY_DTBO := true
@@ -90,43 +102,43 @@ BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 TARGET_OTA_ASSERT_DEVICE := J706F
 
 # Partitions
-BOARD_FLASH_BLOCK_SIZE := 262144 # (BOARD_KERNEL_PAGESIZE * 64)
-BOARD_BOOTIMAGE_PARTITION_SIZE := 0x06000000
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+BOARD_FLASH_BLOCK_SIZE := 262144
+BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_DTBOIMG_PARTITION_SIZE := 25165824
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 0x06000000
-BOARD_SYSTEMIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 3640655872
-BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
+BOARD_SYSTEMIMAGE_PARTITION := ext4
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 109553106616
-# Reserve space for data encryption (109553123000-16384)
-BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_USERDATAIMAGE_PARTITION_SIZE := 109553106616
-BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-#BOARD_ODMIMAGE_FILE_SYSTEM_TYPE := ext4
- 
-#PRODUCT_BUILD_SUPER_PARTITION := true
-BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system
 
-# Dynamic partition size = (Super partition size / 2) - 4MB
-BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
-BOARD_SUPER_PARTITION_GROUPS := somc_dynamic_partitions
+# Reserve space for data encryption (109553123000-16384)
+BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
+BOARD_VENDORIMAGE_PARTITION_SIZE := 1073741824
+BOARD_PRODUCTIMAGE_PARTITION_TYPE := ext4
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true 
+
+# Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
-BOARD_SUPER_PARTITION_ERROR_LIMIT := 12360613888
+BOARD_SUPER_PARTITION_GROUPS := somc_dynamic_partitions
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6438256640
+BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+      product \
+      system \
+      vendor
+
 TARGET_NO_KERNEL := false
 TARGET_NO_RECOVERY := false
 BOARD_USES_RECOVERY_AS_BOOT := false
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
+
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
@@ -155,19 +167,6 @@ AB_OTA_UPDATER := true
 # Use mke2fs to create ext4 images
 TARGET_USES_MKE2FS := true
 
-# A/B updater updatable partitions list. Keep in sync with the partition list
-# with "_a" and "_b" variants in the device. Note that the vendor can add more
-# more partitions to this list for the bootloader and radio.
-AB_OTA_PARTITIONS += \
-    boot \
-    recovery \
-    system \
-    vendor \
-    vbmeta \
-    product \
-    dtbo
-    
-
 # tell update_engine to not change dynamic partition table during updates
 # needed since our qti_dynamic_partitions does not include
 # vendor and odm and we also dont want to AB update them
@@ -177,3 +176,7 @@ TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
+
+BOARD_AVB_RECOVERY_ADD_HASH_FOOTER_ARGS += \
+--prop com.android.build.boot.os_version:$(PLATFORM_VERSION) \
+--prop com.android.build.boot.security_patch:$(PLATFORM_SECURITY_PATCH)
