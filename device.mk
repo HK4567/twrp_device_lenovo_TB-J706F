@@ -15,14 +15,6 @@
 #
 
 LOCAL_PATH := device/lenovo/J706F
-
-AB_OTA_UPDATER := true
-  
-AB_OTA_PARTITIONS += \
-    boot \
-    system \
-    vendor \
-    product
                     
 # Boot control HAL
 PRODUCT_PACKAGES += \
