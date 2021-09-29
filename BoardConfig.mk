@@ -23,7 +23,7 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
-DEVICE_PATH := device/Lenovo/J706F
+LOCAL_PATH := device/lenovo/J706F
 
 # Architecture
 TARGET_ARCH := arm64
@@ -64,7 +64,7 @@ BOARD_KERNEL_SECOND_OFFSET := 0x0
 BOARD_RAMDISK_OFFSET := 0x01000000
 
 TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --pagesize $(BOARD_KERNEL_PAGESIZE)
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
@@ -75,7 +75,7 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_BOOTIMG_HEADER_VERSION)
 
 # Kenel dtb
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
 BOARD_DTB_OFFSET           := 0x01f00000
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
@@ -84,7 +84,7 @@ TARGET_COPY_OUT_PRODUCT := product
 
 # Kenel recovery dtbo
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := J706F
@@ -122,7 +122,7 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4

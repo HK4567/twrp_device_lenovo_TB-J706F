@@ -24,10 +24,4 @@ export FOX_R11=1
 # export OF_USE_TWRP_SAR_DETECT=1
 export OF_QUICK_BACKUP_LIST="/boot;/data;/system_image;/vendor_image;"
 
-# export FOX_USE_ZIP_BINARY="1"
-# export FOX_USE_TAR_BINARY="1"
-# export FOX_ASH_IS_BASH="1"
-# export FOX_REPLACE_BUSYBOX_PS="1"
-# export FOX_USE_BASH_SHELL="1"
- 
 # add_lunch_combo omni_J706F-eng

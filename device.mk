@@ -1,4 +1,5 @@
-DEVICE_PATH := device/Lenovo/J706F
+#
+LOCAL_PATH := device/lenovo/J706F
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
@@ -40,4 +41,4 @@ PRODUCT_HOST_PACKAGES += \
     
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
-    $(DEVICE_PATH)
+    $(LOCAL_PATH)

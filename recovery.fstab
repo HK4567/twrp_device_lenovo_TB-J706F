@@ -1,0 +1,10 @@
+# mount point       fstype    device                                                                flags
+/system       ext4     system                                     flags=display="System";backup=1;logical;slotselect
+/vendor       ext4     vendor                                     flags=display="Vendor";backup=1;logical;slotselect
+/product      ext4     product                                    flags=display="Product";backup=1;logical;slotselect
+/metadata     ext4     /dev/block/bootdevice/by-name/metadata     flags=display="Metadata"
+/data         f2fs     /dev/block/bootdevice/by-name/userdata     flags=display="Data"
+/metadata     ext4     /dev/block/bootdevice/by-name/metadata     flags=display="Metadata"
+/sdcard1      vfat     /dev/block/mmcblk1p1                       flags=display="Sdcard1"
+/boot         emmc     /dev/block/bootdevice/by-name/boot         flags=display="Boot";backup=1;flashimg=1
+/misc         emmc     /dev/block/bootdevice/by-name/misc         flags=display="Misc";backup=1;flashimg=1
