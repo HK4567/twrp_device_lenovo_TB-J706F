@@ -7,7 +7,8 @@ PRODUCT_PLATFORM := sm6150
 AB_OTA_PARTITIONS += \
     boot \
     system \
-    vendor
+    vendor \
+    product
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
