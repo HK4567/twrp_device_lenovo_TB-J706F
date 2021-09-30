@@ -55,18 +55,18 @@ BUILD_BROKEN_DUP_RULES := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
-                               androidboot.memcg=1 \
-                               lpm_levels.sleep_disabled=1 \
-                               video=vfb:640x400,bpp=32,memsize=3072000 \
-                               msm_rtb.filter=0x237 \
-                               service_locator.enable=1 \
-                               swiotlb=1 \
-                               androidboot.usbcontroller=a600000.dwc3 \
-                               earlycon=msm_geni_serial,0x880000 \
-                               loop.max_part=7 \
-                               cgroup.memory=nokmem,nosocket \
-                               androidboot.boot_devices=soc/1d84000.ufshc \
-                               buildvariant=eng
+                        androidboot.memcg=1 \
+                        lpm_levels.sleep_disabled=1 \
+                        video=vfb:640x400,bpp=32,memsize=3072000 \
+                        msm_rtb.filter=0x237 \
+                        service_locator.enable=1 \
+                        swiotlb=1 \
+                        androidboot.usbcontroller=a600000.dwc3 \
+                        earlycon=msm_geni_serial,0x880000 \
+                        loop.max_part=7 \
+                        cgroup.memory=nokmem,nosocket \
+                        androidboot.boot_devices=soc/1d84000.ufshc \
+                        buildvariant=eng
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
@@ -78,8 +78,8 @@ BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
 BOARD_RAMDISK_OFFSET := 0x01000000
 BOARD_DTB_OFFSET := 0x01f00000
 TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
 TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
 BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_INCLUDE_DTB_IN_BOOTIMG := true

@@ -1,3 +1,4 @@
+
 LOCAL_PATH := device/lenovo/J706F
 
 # define hardware platform
@@ -39,3 +40,5 @@ PRODUCT_HOST_PACKAGES += \
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+    
+# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)    
