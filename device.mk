@@ -34,12 +34,6 @@ PRODUCT_PACKAGES += \
     
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
-
-PRODUCT_STATIC_BOOT_CONTROL_HAL := \
-    bootctrl.sm6150 \
-    libgptutils.J706F \
-    libz \
-    libcutils
         
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
