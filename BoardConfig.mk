@@ -23,6 +23,8 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
+LOCAL_PATH := device/lenovo/J706F
+
 # Architecture
 TARGET_ARCH := arm64
 TARGET_ARCH_VARIANT := armv8-a
@@ -45,7 +47,6 @@ TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 QCOM_BOARD_PLATFORMS += sm6150
 
 # Bootloader
-PRODUCT_PLATFORM := sm6150
 TARGET_BOOTLOADER_BOARD_NAME := sm6150
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
@@ -75,7 +76,7 @@ BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
 BOARD_RAMDISK_OFFSET := 0x01000000
 
 TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
 
 BOARD_MKBOOTIMG_ARGS += --kernel_offset $(BOARD_KERNEL_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --ramdisk_offset $(BOARD_RAMDISK_OFFSET)
@@ -84,14 +85,14 @@ BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_KERNEL_HEADER_VERSION)
 
 # Kenel dtb
-TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
 BOARD_DTB_OFFSET           := 0x01f00000
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
 
 # Kenel recovery dtbo
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
 
 # Assert
 TARGET_OTA_ASSERT_DEVICE := J706F
@@ -121,7 +122,7 @@ BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
 BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system vendor
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
