@@ -1,16 +1,11 @@
 export TARGET_ARCH="arm64"
-export FOX_VERSION="R11.0_1.2"
+export FOX_VERSION="R10.0"
 export OF_MAINTAINER=NightShadow
-export ALLOW_MISSING_DEPENDENCIES=true
-export FOX_USE_TWRP_RECOVERY_IMAGE_BUILDER=1
-export LC_ALL="C"
 export OF_USE_MAGISKBOOT=1
 export OF_USE_MAGISKBOOT_FOR_ALL_PATCHES="1"
 export OF_AB_DEVICE="1"
 export OF_STATUS_INDENT_LEFT="48"
 export OF_STATUS_INDENT_RIGHT="48"
-export OF_SCREEN_H=1600
-export OF_SCREEN_W=2560
 export OF_STATUS_H=94
 
 # add_lunch_combo omni_J706F-eng
