@@ -123,8 +123,8 @@ BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
 BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system vendor
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery.wipe
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery.fstab
+TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery/root/system/etc/recovery.wipe
+TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/system/etc/recovery.fstab
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
