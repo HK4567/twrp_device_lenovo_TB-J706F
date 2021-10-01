@@ -1,1 +1,3 @@
 ro.adb.secure=0
+ro.board.platform=sm6150
+vendor.gatekeeper.disable_spu=true

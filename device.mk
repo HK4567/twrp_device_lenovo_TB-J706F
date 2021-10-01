@@ -5,11 +5,17 @@ LOCAL_PATH := device/lenovo/J706F
 PRODUCT_PLATFORM := sm6150
 
 # A/B support
+AB_OTA_UPDATER := true
+
+# A/B support
 AB_OTA_PARTITIONS += \
     boot \
+    dtbo \
     system \
     vendor \
-    product
+    product \
+    vbmeta
+    
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
@@ -34,8 +40,17 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl-wrapper \
     android.hardware.boot@1.0-impl-wrapper.recovery
     
+# Apex libraries    
 PRODUCT_HOST_PACKAGES += \
     libandroidicu
+
+# tell update_engine to not change dynamic partition table during updates
+# needed since our qti_dynamic_partitions does not include
+# vendor and odm and we also dont want to AB update them
+TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
+        
+# Dynamic partitions
+PRODUCT_USE_DYNAMIC_PARTITIONS := true
         
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
