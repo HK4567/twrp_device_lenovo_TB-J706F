@@ -22,7 +22,7 @@ AB_OTA_PARTITIONS += \
     vbmeta   
 
 PRODUCT_PACKAGES += \
-    otapreopt_script \
+    otapreopt_script \"
     update_engine \
     update_verifier \
     update_engine_sideload
