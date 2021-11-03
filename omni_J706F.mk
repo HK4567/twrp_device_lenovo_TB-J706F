@@ -18,9 +18,7 @@ PRODUCT_RELEASE_NAME := J706F
 
 # Inherit from J706F device
 $(call inherit-product, device/lenovo/J706F/device.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_minimal.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
-$(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := J706F

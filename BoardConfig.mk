@@ -23,7 +23,7 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
-LOCAL_PATH := device/lenovo/J706F
+DEVICE_PATH := device/lenovo/J706F
 
 # Architecture
 TARGET_ARCH := arm64
@@ -41,17 +41,10 @@ TARGET_2ND_CPU_VARIANT := cortex-a73
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
 
-# Platform
-TARGET_BOARD_PLATFORM := sm6150
-TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
-QCOM_BOARD_PLATFORMS += sm6150
-
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sm6150
 TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
-
-BUILD_BROKEN_DUP_RULES := true
 
 # Kernel
 BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
@@ -66,23 +59,26 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
                         loop.max_part=7 \
                         cgroup.memory=nokmem,nosocket \
                         androidboot.boot_devices=soc/1d84000.ufshc \
-                        buildvariant=eng
+                        buildvariant=eng                        
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
-BOARD_KERNEL_BASE := 0x00000000
-BOARD_KERNEL_TAGS_OFFSET := 0x00000100
-BOARD_KERNEL_OFFSET := 0x00008000
-BOARD_KERNEL_SECOND_OFFSET := 0x00f00000
-BOARD_RAMDISK_OFFSET := 0x01000000
-BOARD_DTB_OFFSET := 0x01f00000
+BOARD_KERNEL_BASE                 := 0x00000000
+BOARD_KERNEL_TAGS_OFFSET       := 0x00000100
+BOARD_KERNEL_OFFSET              := 0x00008000
+BOARD_KERNEL_SECOND_OFFSET    := 0x00f00000
+BOARD_RAMDISK_OFFSET             := 0x01000000
+BOARD_DTB_OFFSET                  := 0x01f00000
+
 TARGET_KERNEL_ARCH := arm64
-TARGET_PREBUILT_DTB := $(LOCAL_PATH)/prebuilt/dtb.img
-TARGET_PREBUILT_KERNEL := $(LOCAL_PATH)/prebuilt/Image.gz
-BOARD_PREBUILT_DTBOIMAGE := $(LOCAL_PATH)/prebuilt/dtbo.img
+TARGET_NO_KERNEL := false
+TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
-BOARD_INCLUDE_DTB_IN_BOOTIMG := true
+
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
@@ -93,15 +89,21 @@ BOARD_MKBOOTIMG_ARGS += --tags_offset $(BOARD_KERNEL_TAGS_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --second_offset $(BOARD_KERNEL_SECOND_OFFSET)
 BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_KERNEL_HEADER_VERSION)
 
+# Platform
+TARGET_BOARD_PLATFORM := sm6150
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
+QCOM_BOARD_PLATFORMS += sm6150
+TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
+
 # Partitions
-TARGET_NO_KERNEL := false
-TARGET_NO_RECOVERY := false
-BOARD_USES_RECOVERY_AS_BOOT := false
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 BOARD_FLASH_BLOCK_SIZE := 262144
+BOARD_USES_PRODUCTIMAGE := true
+BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
+
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
-BOARD_DTBOIMG_PARTITION_SIZE := 8388608
+
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # File systems
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -123,12 +125,14 @@ BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
 BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system vendor
 
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(LOCAL_PATH)/recovery/root/system/etc/recovery.wipe
-TARGET_RECOVERY_FSTAB := $(LOCAL_PATH)/recovery/root/system/etc/recovery.fstab
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # TWRP Configuration
 BOARD_HAS_NO_REAL_SDCARD := true
