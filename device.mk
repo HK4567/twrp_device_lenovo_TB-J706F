@@ -10,16 +10,13 @@ AB_OTA_UPDATER := true
 # A/B support
 AB_OTA_PARTITIONS += \
     boot \
-    dtbo \
     system \
     vendor \
     product \
-    vbmeta
-    
+    vbmeta   
 
 PRODUCT_PACKAGES += \
-    otapreopt_script \
-    cppreopts.sh \
+    otapreopt_script \"
     update_engine \
     update_verifier \
     update_engine_sideload

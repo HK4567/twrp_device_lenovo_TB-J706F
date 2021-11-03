@@ -15,7 +15,7 @@
 //
 
 cc_library {
-    name: "libgptutils.J706F",
+    name: "libgptutils",
     vendor: true,
     recovery_available: true,
     shared_libs: [

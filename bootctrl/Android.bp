@@ -13,13 +13,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 //
-
-soong_namespace {
-    imports: ["hardware/qcom/bootctrl"],
-}
  
 cc_library {
     name: "bootctrl.sm6150",
     defaults: ["bootctrl_hal_defaults"],
-    static_libs: ["libgptutils.J706F"],
+    static_libs: ["libgptutils"],
 }
