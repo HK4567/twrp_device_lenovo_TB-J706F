@@ -7,7 +7,10 @@
 # <mount_point>  <fstype>  <device>        <device2>                  <flags>
 /data             f2fs     /dev/block/bootdevice/by-name/userdata     flags=fileencryption=ice:aes-256-cts;wrappedkey
 #/cache            ext4     /dev/block/bootdevice/by-name/cache        flags=backup=1;wipeingui;wipeduringfactoryreset
-/system_root      ext4     /dev/block/mapper/system                   flags=backup=0;logical;slotselect
+# Dyanmic Partitions
+system           ext4       /system                                               display="System"
+vendor           ext4       /vendor                                               display="Vendor"
+product          ext4       /product                                              display="Product"
 /super            emmc     /dev/block/bootdevice/by-name/super        flags=display="super";backup=1;flashimg=1
 /boot             emmc     /dev/block/bootdevice/by-name/boot         flags=backup=1;flashimg=1;slotselect
 /dtbo             emmc     /dev/block/bootdevice/by-name/dtbo         flags=display="dtbo";backup=1;flashimg=1;slotselect
