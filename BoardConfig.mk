@@ -98,7 +98,6 @@ TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_USES_PRODUCTIMAGE := true
-BOARD_SYSTEMIMAGE_EXTFS_INODE_COUNT := 4096
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
@@ -116,14 +115,19 @@ TARGET_SCREEN_HEIGHT := 1600
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_PRODUCT := product
 
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
-BOARD_SUPER_PARTITION_GROUPS := somc_dynamic_partitions
-BOARD_SOMC_DYNAMIC_PARTITIONS_SIZE := 6438256640
-BOARD_SOMC_DYNAMIC_PARTITIONS_PARTITION_LIST := product system vendor
+BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6438256640
+BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
+      system \
+      vendor \
+      product
 
+# Use mke2fs to create ext4 images
+TARGET_USES_MKE2FS := true
+    
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
@@ -131,33 +135,71 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-
+BOARD_SUPPRESS_SECURE_ERASE := true
+TARGET_NO_RECOVERY := false
+TARGET_RECOVERY_DEVICE_MODULES += \
+    android.hidl.base@1.0 \
+    ashmemd \
+    ashmemd_aidl_interface-cpp \
+    bootctrl.$(TARGET_BOARD_PLATFORM).recovery \
+    libashmemd_client \
+    libcap \
+    libion \
+    libpcrecpp \
+    libxml2
+TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
+TARGET_RECOVERY_DEVICE_MODULES += debuggerd
+ 
+# Extras
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
+TW_INCLUDE_RESETPROP := true
+TW_INCLUDE_REPACKTOOLS := false       
 
 # TWRP Configuration
-BOARD_HAS_NO_REAL_SDCARD := true
-RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
+TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
+TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+TW_THEME := portrait_hdpi:
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_EXCLUDE_DEFAULT_USB_INIT := true
-TW_EXTRA_LANGUAGES := true
-TW_INCLUDE_NTFS_3G := true
-TW_INPUT_BLACKLIST := "hbtp_vm"
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 80
-TW_THEME := portrait_hdpi
 TW_Y_OFFSET := 89
 TW_H_OFFSET := -89
-TARGET_RECOVERY_DEVICE_MODULES += android.hardware.boot@1.0
-TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
-TW_NO_SCREEN_BLANK := true
-TW_USE_TOOLBOX := true
-
-# Use mke2fs to create ext4 images
-TARGET_USES_MKE2FS := true
+TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_EXCLUDE_ENCRYPTED_BACKUPS := false
+TW_EXTRA_LANGUAGES := true
+TW_HAS_EDL_MODE := true
+TW_INCLUDE_NTFS_3G := true
+TW_INPUT_BLACKLIST := "hbtp_vm"
+TW_NO_BIND_SYSTEM := true
+TW_NO_EXFAT_FUSE := true
+TW_OVERRIDE_SYSTEM_PROPS := \
+    "ro.build.product;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
+TW_RECOVERY_ADDITIONAL_RELINK_BINARY_FILES += \
+    $(TARGET_OUT_EXECUTABLES)/ashmemd \
+    $(TARGET_OUT_EXECUTABLES)/strace
+TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
+    $(TARGET_OUT_SHARED_LIBRARIES)/android.hidl.base@1.0.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/ashmemd_aidl_interface-cpp.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libashmemd_client.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libcap.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libion.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libpcrecpp.so \
+    $(TARGET_OUT_SHARED_LIBRARIES)/libxml2.so
     
 # Hack: prevent anti rollback
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 PLATFORM_VERSION := 16.1.0
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
+BOARD_USES_METADATA_PARTITION := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
+PRODUCT_ENFORCE_VINTF_MANIFEST := true
+
+# TWRP Debug Flags
+TARGET_USES_LOGD := true
+TWRP_INCLUDE_LOGCAT := true
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
+BOARD_RAMDISK_USE_LZMA := true
