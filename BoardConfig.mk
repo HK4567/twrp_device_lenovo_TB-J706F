@@ -60,8 +60,6 @@ BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
                         cgroup.memory=nokmem,nosocket \
                         androidboot.boot_devices=soc/1d84000.ufshc \
                         buildvariant=eng                        
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -101,7 +99,7 @@ BOARD_USES_PRODUCTIMAGE := true
 
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
-
+BOARD_DTBOIMG_PARTITION_SIZE := 100663296
 BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # File systems
