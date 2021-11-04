@@ -115,8 +115,8 @@ BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
 TARGET_USES_MKE2FS := true
     
 # Partitions (listed in the file) to be wiped under recovery.
-TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery.wipe
-TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery.fstab
+TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/system/etc/recovery.wipe
+TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
