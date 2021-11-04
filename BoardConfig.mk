@@ -47,20 +47,8 @@ TARGET_NO_BOOTLOADER := true
 TARGET_USES_UEFI := true
 
 # Kernel
-BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom \
-                        androidboot.memcg=1 \
-                        lpm_levels.sleep_disabled=1 \
-                        video=vfb:640x400,bpp=32,memsize=3072000 \
-                        msm_rtb.filter=0x237 \
-                        service_locator.enable=1 \
-                        swiotlb=1 \
-                        androidboot.usbcontroller=a600000.dwc3 \
-                        earlycon=msm_geni_serial,0x880000 \
-                        loop.max_part=7 \
-                        cgroup.memory=nokmem,nosocket \
-                        androidboot.boot_devices=soc/1d84000.ufshc \
-                        buildvariant=eng                        
-BOARD_KERNEL_IMAGE_NAME := Image.gz
+BOARD_KERNEL_CMDLINE := androidboot.hardware=qcom androidboot.memcg=1 lpm_levels.sleep_disabled=1 video=vfb:640x400,bpp=32,memsize=3072000 msm_rtb.filter=0x237 service_locator.enable=1 swiotlb=1 androidboot.usbcontroller=a600000.dwc3 earlycon=msm_geni_serial,0x880000 loop.max_part=7 cgroup.memory=nokmem,nosocket androidboot.selinux=permissive androidboot.boot_devices=soc/1d84000.ufshc buildvariant=eng
+BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
 BOARD_KERNEL_BASE                 := 0x00000000
@@ -73,7 +61,7 @@ BOARD_DTB_OFFSET                  := 0x01f00000
 TARGET_KERNEL_ARCH := arm64
 TARGET_NO_KERNEL := false
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
+TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 BOARD_INCLUDE_RECOVERY_DTBO := true
 
@@ -96,7 +84,6 @@ TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
 BOARD_USES_PRODUCTIMAGE := true
-
 BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
 BOARD_DTBOIMG_PARTITION_SIZE := 100663296

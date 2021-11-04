@@ -1,4 +1,8 @@
+on boot
+    start ashmemd
+    
 service ashmemd /system/bin/ashmemd
-    class core
-    user nobody
-    group nobody
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
