@@ -77,8 +77,12 @@ PRODUCT_SOONG_NAMESPACES += \
     
 # PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)  
 
+# tzdata
+PRODUCT_PACKAGES_ENG += \
+    tzdata_twrp
+    
 #TWRP
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/systemmanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/manifest.xml \
-    $(LOCAL_PATH)/prebuilt/vendormanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/manifest.xml
+#PRODUCT_COPY_FILES += \
+#    $(LOCAL_PATH)/prebuilt/systemmanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/manifest.xml \
+#    $(LOCAL_PATH)/prebuilt/vendormanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/manifest.xml
     
