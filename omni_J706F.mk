@@ -13,12 +13,15 @@
 # limitations under the License.
 #
 
-# Release name
-PRODUCT_RELEASE_NAME := J706F
-
 # Inherit from J706F device
 $(call inherit-product, device/lenovo/J706F/device.mk)
 $(call inherit-product, vendor/omni/config/common.mk)
+
+# Inherit from common AOSP config
+$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
+
+# Release name
+PRODUCT_RELEASE_NAME := J706F
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := J706F

@@ -1,7 +1,5 @@
 
-# Inherit from common AOSP config
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
- 
+
 LOCAL_PATH := device/lenovo/J706F
 
 # define hardware platform
@@ -23,6 +21,7 @@ AB_OTA_PARTITIONS += \
 
 PRODUCT_PACKAGES += \
     otapreopt_script \
+    cppreopts.sh \
     update_engine \
     update_verifier \
     update_engine_sideload
@@ -32,32 +31,21 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
-
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
-   
-# Userdata Checkpointing OTA GC
-PRODUCT_PACKAGES += \
-    checkpoint_gc
                  
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    bootctrl.sm6150 \
-    bootctrl.sm6150.recovery \
     android.hardware.boot@1.0-service \
     android.hardware.boot@1.0-impl \
     android.hardware.boot@1.0-impl-recovery \
     android.hardware.boot@1.0-impl-wrapper \
-    android.hardware.boot@1.0-impl-wrapper.recovery
+    android.hardware.boot@1.0-impl-wrapper.recovery \
+    bootctrl.$(PRODUCT_PLATFORM) \
+    bootctrl.$(PRODUCT_PLATFORM).recovery
 
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-    fastbootd \
-    resetprop
+    fastbootd 
 
 # qcom decryption
 PRODUCT_PACKAGES_ENG += \
@@ -74,10 +62,8 @@ PRODUCT_USE_DYNAMIC_PARTITIONS := true
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
-    
-# PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)  
 
-# tzdata
-PRODUCT_PACKAGES_ENG += \
-    tzdata_twrp
-    
+#TWRP
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/prebuilt/systemmanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/manifest.xml \
+    $(LOCAL_PATH)/prebuilt/vendormanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/manifest.xml \
