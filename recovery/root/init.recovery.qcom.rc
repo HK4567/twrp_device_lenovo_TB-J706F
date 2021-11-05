@@ -29,16 +29,11 @@ import /init.recovery.qcom_decrypt.rc
 
 on init
     write /sys/class/backlight/panel0-backlight/brightness 200
-    
+        
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-    setprop ro.board.platform sm6150
-    start qseecomd
 
-service sbinqseecomd /system/bin/qseecomd
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0
+on boot
+    setprop sys.usb.config mtp,adb
