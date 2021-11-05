@@ -31,7 +31,7 @@ on init
     write /sys/class/backlight/panel0-backlight/brightness 200
 
 on post-fs    
-    start boot-hal-1-1     
+    start boot-hal-1-0     
 
 on boot
     setprop sys.usb.config mtp,adb
