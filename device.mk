@@ -1,5 +1,4 @@
 
-
 LOCAL_PATH := device/lenovo/J706F
 
 # define hardware platform
@@ -17,7 +16,7 @@ AB_OTA_PARTITIONS += \
     vendor \
     product \
     vbmeta \
-    dtbo  
+    dtbo
 
 PRODUCT_PACKAGES += \
     otapreopt_script \

@@ -22,6 +22,7 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
+ALLOW_MISSING_DEPENDENCIES := true
 
 DEVICE_PATH := device/lenovo/J706F
 
@@ -73,7 +74,6 @@ BOARD_RAMDISK_OFFSET             := 0x01000000
 BOARD_DTB_OFFSET                  := 0x01f00000
 
 TARGET_KERNEL_ARCH := arm64
-TARGET_NO_KERNEL := false
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
@@ -96,10 +96,14 @@ TARGET_USES_HARDWARE_QCOM_BOOTCTRL := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
-BOARD_USES_PRODUCTIMAGE := true
-BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
+BOARD_BOOTIMAGE_PARTITION_SIZE := 100663296
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
-BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
+
+# A/B device flags
+TARGET_NO_KERNEL := false
+TARGET_NO_RECOVERY := false
+BOARD_USES_RECOVERY_AS_BOOT := false
+BOARD_BUILD_SYSTEM_ROOT_IMAGE := true
 
 # File systems
 TARGET_USERIMAGES_USE_EXT4 := true
@@ -111,7 +115,9 @@ TARGET_SCREEN_HEIGHT := 1600
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
 
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
@@ -133,7 +139,6 @@ TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_SUPPRESS_SECURE_ERASE := true
-TARGET_NO_RECOVERY := false
 TARGET_RECOVERY_DEVICE_MODULES += \
     android.hidl.base@1.0 \
     ashmemd \
