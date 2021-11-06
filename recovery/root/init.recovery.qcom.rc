@@ -1,16 +1,5 @@
 
-import /init.recovery.qcom_decrypt.rc
-
-on init
-    write /sys/class/backlight/panel0-backlight/brightness 200  
-    start boot-hal-1-0
-    
-    # Create location for fs_mgr to store abbreviated output from filesystem
-    # checker programs.
-    mkdir /dev/fscklogs 0770 root system
-    
-on boot
-    setprop sys.usb.config mtp,adb
+import /init.recovery.qcom_decrypt.rc    
         
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -30,6 +19,12 @@ service qseecomd /system/bin/qseecomd
     disabled
     seclabel u:r:recovery:s0
 
+service time_daemon /system/bin/time_daemon
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+    
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service-qti
     user root
     group root
@@ -48,32 +43,32 @@ service boot-1-0 /system/bin/android.hardware.boot@1.0-service
     disabled
     seclabel u:r:recovery:s0 
 
-on property:hwservicemanager.ready=true
+on boot
+    setprop sys.usb.config mtp,adb
+            
+on init
+    write /sys/class/backlight/panel0-backlight/brightness 200  
+    start boot-hal-1-0
+    start hwservicemanager
+    start time_daemon
+    setprop crypto.ready 1
+    
+on property:crypto.ready=1
     start qseecomd
+
+on property:crypto.ready=0
+    stop qseecomd
+    stop keymaster-4-0
+    stop gatekeeper-1-0
+    stop servicemanager
 
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-0
-    start gatekeeper-1-0
-    start boot-1-0 
-
-on property:ro.crypto.state=unsupported
-    stop qseecomd
-    stop keymaster-4-0
-    stop gatekeeper-1-0
-
-on property:ro.crypto.state=unencrypted
-    stop qseecomd
-    stop keymaster-4-0
-    stop gatekeeper-1-0
-
-on property:twrp.decrypt.done=true && property:twrp.all.users.decrypted=true
-    stop qseecomd
-    stop keymaster-4-0
-    stop gatekeeper-1-0 
-        
-    # Set fscklog permission
-    chown root system /dev/fscklogs/log
-    chmod 0770 /dev/fscklogs/log
+    start gatekeeper-1-0 
+    restart time_daemon
+    
+on property:sys.usb.config=mtp,adb
+    restart time_daemon
 
 on property:recovery.perf.mode=1
     write /sys/devices/system/cpu/cpu1/online 1
