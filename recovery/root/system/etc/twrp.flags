@@ -42,6 +42,6 @@ vendor                                                  /vendor                e
 /apdp             emmc     /dev/block/bootdevice/by-name/apdp         flags=display="apdp";backup=1;flashimg=1
 
 # Removable storage
-/external_sd      vfat     /dev/block/mmcblk0p1  /dev/block/mmcblk0   flags=display="external_sd";storage;wipeingui;removable;fsflags="utf8"
-/usb-otg          vfat     /dev/block/sdg1  /dev/block/sdg            flags=display="usb-otg";storage;wipeingui;removable;fsflags="utf8"
+/external_sd      auto     /dev/block/mmcblk0p1  /dev/block/mmcblk0   flags=display="external_sd";storage;wipeingui;removable;fsflags="utf8"
+/usb-otg          auto     /dev/block/sdg1  /dev/block/sdg            flags=display="usb-otg";storage;wipeingui;removable;fsflags="utf8"
 
