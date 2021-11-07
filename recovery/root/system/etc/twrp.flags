@@ -43,5 +43,5 @@ vendor                                                  /vendor                e
 
 # Removable storage
 /external_sd      auto     /dev/block/mmcblk0p1  /dev/block/mmcblk0   flags=display="external_sd";storage;wipeingui;removable;fsflags="utf8"
-/usb-otg          auto     /dev/block/sdg1  /dev/block/sdg            flags=display="usb-otg";storage;wipeingui;removable;fsflags="utf8"
+/usb-otg          vfat     /dev/block/sdg1  /dev/block/sdg            flags=display="USB-OTG";storage;wipeingui;removable;fsflags="utf8"
 
