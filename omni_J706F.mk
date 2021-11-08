@@ -26,6 +26,6 @@ PRODUCT_RELEASE_NAME := J706F
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := J706F
 PRODUCT_NAME := omni_J706F
-PRODUCT_BRAND := lenovo
-PRODUCT_MODEL := lenovo TB-J706F
-PRODUCT_MANUFACTURER := lenovo
+PRODUCT_BRAND := Lenovo
+PRODUCT_MODEL := Lenovo TB-J706F
+PRODUCT_MANUFACTURER := Lenovo
