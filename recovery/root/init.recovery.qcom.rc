@@ -4,6 +4,15 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
+    
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+    install_keyring
+
+on early-fs
+    start vold
 
 # Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
 
@@ -32,6 +41,19 @@ service servicemanager /system/bin/servicemanager
     disabled
     seclabel u:r:recovery:s0
 
+service keystore_auth /system/bin/keystore_auth
+    oneshot
+    user system
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+service keystore /system/bin/keystore /tmp/misc/keystore
+    user root
+    group root drmrpc readproc
+    disabled
+    seclabel u:r:recovery:s0
+
 service boot-1-0 /system/bin/android.hardware.boot@1.0-service
     user root
     group root
@@ -50,9 +72,14 @@ service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service-qti
     disabled
     seclabel u:r:recovery:s0
 
+service ldconfigtxt /system/bin/touch /sbin/ld.config.txt
+    oneshot
+    seclabel u:r:recovery:s0
+
 on boot
     setprop sys.usb.config mtp,adb
-
+    export LD_CONFIG_FILE /sbin/ld.config.txt
+    
 on init
     start boot-hal-1-0
     start hwservicemanager

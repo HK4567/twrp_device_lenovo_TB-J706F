@@ -12,7 +12,7 @@
 # Persist
 /persist          ext4        /dev/block/bootdevice/by-name/persist        flags=display="Persist";backup=1;flashimg=1
 /dsp              ext4        /dev/block/bootdevice/by-name/dsp            flags=display="Dsp";backup=1;slotselect
-/metadata         ext4        /dev/block/bootdevice/by-name/metadata       flags=display="Metadata";backup=1;wrappedkey
+/metadata         ext4        /dev/block/bootdevice/by-name/metadata       flags=display="Metadata";backup=1
 /splash           emmc        /dev/block/bootdevice/by-name/splash         flags=display="Splash";backup=1;flashimg=1
 /modem		      emmc	      /dev/block/bootdevice/by-name/modem		   flags=display="Modem";backup=1;slotselect
 /fsc              emmc        /dev/block/bootdevice/by-name/fsc            flags=display="Fsc";backup=1;subpartitionof=/efs1
