@@ -32,11 +32,11 @@
 #TODO: Add 'check' as fs_mgr_flags with data partition.
 # Currently we dont have e2fsck compiled. So fs check would failed.
 
-#<src>                                                 <mnt_point>              <type>      <mnt_flags and options>                           <fs_mgr_flags>
+#<src>                                      <mnt_point>       <type>      <mnt_flags and options>                               <fs_mgr_flags>
 
-system                                                 /system                   ext4        ro,barrier=1,discard                                  wait,slotselect
-product                                                /product                  ext4        ro,barrier=1,discard                                  wait,slotselect
-vendor                                                 /vendor                   ext4        ro,barrier=1,discard                                  wait,slotselect
-/dev/block/bootdevice/by-name/metadata            /metadata                ext4         noatime,nosuid,nodev,discard                       wait,formattable
-/dev/block/bootdevice/by-name/userdata             /data                     f2fs         noatime,nosuid,nodev,discard,reserve_root=51200,resuid=1999,resgid=1065,fsync_mode=nobarrier                      wait,check,formattable,fileencryption=ice,wrappedkey
-/dev/block/bootdevice/by-name/misc                 /misc                     emmc        defaults                                             defaults
+system                                      /system           ext4        ro,barrier=1,discard                                  wait,slotselect
+product                                     /product          ext4        ro,barrier=1,discard                                  wait,slotselect
+vendor                                      /vendor           ext4        ro,barrier=1,discard                                  wait,slotselect
+/dev/block/bootdevice/by-name/metadata      /metadata         ext4        noatime,nosuid,nodev,discard                          wait,formattable
+/dev/block/bootdevice/by-name/userdata      /data             f2fs        noatime,nosuid,nodev,discard,reserve_root=51200,resuid=1999,resgid=1065,fsync_mode=nobarrier         wait,check,formattable,fileencryption=ice,wrappedkey
+/dev/block/bootdevice/by-name/misc          /misc             emmc        defaults                                              defaults
