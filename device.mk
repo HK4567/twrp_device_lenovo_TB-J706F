@@ -30,7 +30,7 @@ AB_OTA_POSTINSTALL_CONFIG += \
     POSTINSTALL_PATH_system=system/bin/otapreopt_script \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
-                 
+
 # Boot control HAL
 PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-service \
@@ -50,19 +50,14 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES_ENG += \
     qcom_decrypt \
     qcom_decrypt_fbe
-            
+
 # Apex libraries
-PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
-         
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu
+
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-        
+
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
-
-#TWRP
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/systemmanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/system/manifest.xml \
-    $(LOCAL_PATH)/prebuilt/vendormanifest.xml:$(TARGET_COPY_OUT_RECOVERY)/root/vendor/manifest.xml

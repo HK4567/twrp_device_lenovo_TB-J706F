@@ -1,15 +1,9 @@
-
 import /init.recovery.qcom_decrypt.rc    
-        
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-    chmod 0660 /dev/qseecom
-    chown system drmrpc /dev/qseecom
-    chmod 0664 /dev/ion
-    chown system system /dev/ion
-    install_keyring
 
 # Separate copy needed to use /sbin/linker64 instead of /system/bin/linker64
 
@@ -24,7 +18,26 @@ service time_daemon /system/bin/time_daemon
     group root
     disabled
     seclabel u:r:recovery:s0
-    
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+
+service servicemanager /system/bin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
+
+service boot-1-0 /system/bin/android.hardware.boot@1.0-service
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
 service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service-qti
     user root
     group root
@@ -35,26 +48,16 @@ service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service-qti
     user root
     group root drmrpc
     disabled
-    seclabel u:r:recovery:s0           
-    
-service boot-1-0 /system/bin/android.hardware.boot@1.0-service
-    user root
-    group root
-    disabled
-    seclabel u:r:recovery:s0 
+    seclabel u:r:recovery:s0
 
 on boot
     setprop sys.usb.config mtp,adb
-            
+
 on init
-    write /sys/class/backlight/panel0-backlight/brightness 200  
     start boot-hal-1-0
     start hwservicemanager
     start time_daemon
     setprop crypto.ready 1
-    
-on property:crypto.ready=1
-    start qseecomd
 
 on property:crypto.ready=0
     stop qseecomd
@@ -62,9 +65,13 @@ on property:crypto.ready=0
     stop gatekeeper-1-0
     stop servicemanager
 
+on property:crypto.ready=1
+    start qseecomd
+
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-0
-    start gatekeeper-1-0 
+    start gatekeeper-1-0
+    start servicemanager
     restart time_daemon
     
 on property:sys.usb.config=mtp,adb
