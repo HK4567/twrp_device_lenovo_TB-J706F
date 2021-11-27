@@ -16,4 +16,4 @@ Display | 2560 x 1600 pixels, 11.5" OLED
 Rear Camera  | 13MP + 5MP
 Front Camera | 8MP + 8MP
 
-![Device Picture](https://github.com/HK4567/android_device_lenvovo_TB-J706F-Twrp/settings/og-template)
+![Device Picture](https://img30.360buyimg.com/pop/jfs/t1/141216/2/21867/290699/61a233c0E6bba0969/459e6491d7d99a5f.jpg)
