@@ -1,2 +1,1 @@
-# test
-android_device_lenvovo_TB-J706F
+Lenovo TB-J706F Twrp Tree
