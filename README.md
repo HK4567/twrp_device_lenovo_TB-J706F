@@ -5,7 +5,7 @@
 Basic   | Spec Sheet
 -------:|:-------------------------
 CPU     | Octa-core (2x2.2 GHz Kryo 470 Gold & 6x1.8 GHz Kryo 470 Silver)
-CHIPSET | Qualcomm SDM730G Snapdragon 730G
+CHIPSET | Qualcomm SM7150 Snapdragon 730G
 GPU     | Adreno 618
 Memory  | 6GB
 Shipped Android Version | 10
