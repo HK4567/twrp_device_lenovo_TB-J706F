@@ -5,19 +5,6 @@ LOCAL_PATH := device/lenovo/J706F
 PRODUCT_PLATFORM := sm6150
 
 # A/B support
-AB_OTA_UPDATER := true
-
-# A/B updater updatable partitions list. Keep in sync with the partition list
-# with "_a" and "_b" variants in the device. Note that the vendor can add more
-# more partitions to this list for the bootloader and radio.
-AB_OTA_PARTITIONS += \
-    boot \
-    system \
-    vendor \
-    product \
-    vbmeta \
-    dtbo
-
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
@@ -38,26 +25,19 @@ PRODUCT_PACKAGES += \
     android.hardware.boot@1.0-impl-recovery \
     android.hardware.boot@1.0-impl-wrapper \
     android.hardware.boot@1.0-impl-wrapper.recovery \
-    bootctrl.$(PRODUCT_PLATFORM) \
-    bootctrl.$(PRODUCT_PLATFORM).recovery
+    bootctrl.sm6150 \
+    bootctrl.sm6150.recovery
+
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu
 
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-    fastbootd 
-
-# qcom decryption
-PRODUCT_PACKAGES_ENG += \
-    qcom_decrypt \
-    qcom_decrypt_fbe
-
-# Apex libraries
-PRODUCT_COPY_FILES += \
-    $(OUT_DIR)/target/product/$(PRODUCT_RELEASE_NAME)/obj/SHARED_LIBRARIES/libandroidicu_intermediates/libandroidicu.so:$(TARGET_COPY_OUT_RECOVERY)/root/system/lib64/libandroidicu.so
-
-# Dynamic partitions
-PRODUCT_USE_DYNAMIC_PARTITIONS := true
+    fastbootd
 
 # Soong namespaces
 PRODUCT_SOONG_NAMESPACES += \
     $(LOCAL_PATH)
+
+#PRODUCT_COPY_FILES += $(call find-copy-subdir-files,*,$(LOCAL_PATH)/recovery/root,recovery/root)
