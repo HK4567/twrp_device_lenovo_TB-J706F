@@ -5,6 +5,8 @@ LOCAL_PATH := device/lenovo/J706F
 PRODUCT_PLATFORM := sm6150
 
 # A/B support
+AB_OTA_UPDATER := true
+
 PRODUCT_PACKAGES += \
     otapreopt_script \
     cppreopts.sh \
