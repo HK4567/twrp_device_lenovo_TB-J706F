@@ -16,7 +16,6 @@
 
 cc_library {
     name: "libgptutils",
-    defaults: ["libgptutils_defaults"],
     vendor_available: true,
     recovery_available: true,
     shared_libs: [
