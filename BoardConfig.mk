@@ -22,7 +22,6 @@
 # bitrot and build breakages. Building a component unconditionally does
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
-ALLOW_MISSING_DEPENDENCIES := true
 
 DEVICE_PATH := device/lenovo/J706F
 
@@ -63,8 +62,6 @@ BOARD_KERNEL_CMDLINE := \
             cgroup.memory=nokmem,nosocket \
             androidboot.boot_devices=soc/1d84000.ufshc \
             buildvariant=eng
-BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -74,11 +71,10 @@ BOARD_KERNEL_OFFSET              := 0x00008000
 BOARD_KERNEL_SECOND_OFFSET    := 0x00f00000
 BOARD_RAMDISK_OFFSET             := 0x01000000
 BOARD_DTB_OFFSET                  := 0x01f00000
-
-TARGET_KERNEL_ARCH := arm64
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
+TARGET_KERNEL_ARCH := arm64
 BOARD_INCLUDE_RECOVERY_DTBO := true
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
@@ -97,7 +93,6 @@ QCOM_BOARD_PLATFORMS += sm6150
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
-
 BOARD_BOOTIMAGE_PARTITION_SIZE := 67108864
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 100663296
 BOARD_SYSTEMIMAGE_PARTITION_TYPE := ext4
@@ -122,7 +117,7 @@ TARGET_COPY_OUT_VENDOR := vendor
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
 BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
-BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6438256640
+BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6442450944
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
       system \
       vendor \

@@ -16,23 +16,6 @@
 
 cc_library {
     name: "libgptutils",
+    defaults: ["libgptutils_defaults"],
     vendor_available: true,
-    recovery_available: true,
-    shared_libs: [
-        "libcutils",
-        "liblog",
-        "libz",
-    ],
-    cflags: [
-        "-Wall",
-        "-Werror",
-    ],
-    srcs: [
-        "gpt-utils.cpp",
-    ],
-    owner: "qti",
-    header_libs: [
-        "device_kernel_headers",
-    ],
-    export_include_dirs: ["."],
 }
