@@ -24,14 +24,12 @@
 # OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
-
-on fs
-    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64/vendor/lib64/hw
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+import /init.recovery.qcom_decrypt.rc
 
 on init
-    write /sys/class/backlight/panel0-backlight/brightness 100
+    write /sys/class/backlight/panel0-backlight/brightness 200
 
-on boot
-    setprop sys.usb.config adb
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64/vendor/lib64/hw
