@@ -33,3 +33,12 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /system/lib64:/vendor/lib64/vendor/lib64/hw
+
+service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service-qti
+    user root
+    group root
+    disabled
+    seclabel u:r:recovery:s0
+
+on boot
+    start keymaster-4-0
