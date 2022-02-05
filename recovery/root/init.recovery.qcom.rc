@@ -32,9 +32,9 @@ on init
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64/vendor/lib64/hw
+    export LD_LIBRARY_PATH /sbin:/vendor/lib64/vendor/lib64/hw
 
-service systembinqseecomd /system/bin/qseecomd
+service systembinqseecomd /sbin/qseecomd
     user root
     group root
     disabled
@@ -67,13 +67,13 @@ service keystore /system/bin/keystore /tmp/misc/keystore
     disabled
     seclabel u:r:recovery:s0
 
-service gatekeeper-1-0 /system/bin/android.hardware.gatekeeper@1.0-service-qti
+service gatekeeper-1-0 /sbin/android.hardware.gatekeeper@1.0-service-qti
     user root
     group root
     disabled
     seclabel u:r:recovery:s0
 
-service keymaster-4-0 /system/bin/android.hardware.keymaster@4.0-service-qti
+service keymaster-4-0 /sbin/android.hardware.keymaster@4.0-service-qti
     user root
     group root
     disabled
@@ -83,13 +83,13 @@ on boot
     setprop sys.usb.config adb
 
 on property:crypto.ready=0
-    stop systembinqseecomd
+    stop sbinqseecomd
     stop keymaster-4-0
     stop gatekeeper-1-0
     stop servicemanager
  
 on property:crypto.ready=1
-    start systembinqseecomd
+    start sbinqseecomd
  
 on property:vendor.sys.listeners.registered=true
     start keymaster-4-0
