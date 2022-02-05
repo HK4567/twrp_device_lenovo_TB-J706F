@@ -1,5 +1,5 @@
 on boot
-  	start ashmemd
+    start ashmemd
  
 service ashmemd /system/bin/ashmemd
     user root
