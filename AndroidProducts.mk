@@ -15,7 +15,7 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/omni_J706F.mk
+    $(LOCAL_DIR)/twrp_J706F.mk
 
 COMMON_LUNCH_CHOICES := \
-     omni_J706F-eng
+     twrp_J706F-eng
