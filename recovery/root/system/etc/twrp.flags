@@ -1,0 +1,34 @@
+#<mount_point>    <fstype>    <device>                 <device2>           <flags>
+/boot             emmc        /dev/block/bootdevice/by-name/boot           flags=display="Boot";backup=1;flashimg=1;slotselect
+/recovery         emmc        /dev/block/bootdevice/by-name/recovery       flags=display="Recovery";backup=1;flashimg=1;slotselect
+/dtbo             emmc        /dev/block/bootdevice/by-name/dtbo           flags=display="Dtbo";backup=1;flashimg=1;slotselect
+/data             f2fs           /dev/block/bootdevice/by-name/userdata        flags=fileencryption=ice:aes-256-cts
+/super           emmc       /dev/block/bootdevice/by-name/super                   flags=backup=1;display="Super";flashimg=1
+/lenovocust       ext4         /dev/block/bootdevice/by-name/lenovocust      flags=display="Lenovocust";backup=1;flashimg=1
+/vbmeta           emmc       /dev/block/bootdevice/by-name/vbmeta         flags=display="Vbmeta";flashimg=1;slotselect
+/misc             emmc        /dev/block/bootdevice/by-name/misc
+
+/efs1             emmc        /dev/block/bootdevice/by-name/modemst1       flags=display="EFS";backup=1
+/efs2             emmc        /dev/block/bootdevice/by-name/modemst2       flags=backup=1;subpartitionof=/efs1
+
+# Persist
+/persist          ext4        /dev/block/bootdevice/by-name/persist            flags=display="Persist";backup=1;flashimg=1
+/dsp              ext4        /dev/block/bootdevice/by-name/dsp             flags=backup=1;slotselect
+/metadata         ext4        /dev/block/bootdevice/by-name/metadata      flags=display="Metadata"
+/splash           emmc        /dev/block/bootdevice/by-name/splash         flags=display="Splash";backup=1;flashimg=1
+/modem		      emmc	      /dev/block/bootdevice/by-name/modem		    flags=display="Modem";backup=1;slotselect
+/fsc              emmc        /dev/block/bootdevice/by-name/fsc            flags=display="Fsc";backup=1;subpartitionof=/efs1
+/fsg              emmc        /dev/block/bootdevice/by-name/fsg            flags=display="Fsg";backup=1;subpartitionof=/efs1
+/devcfg           emmc       /dev/block/bootdevice/by-name/devcfg       flags=display="Devcfg";flashimg=1;slotselect
+/bt_firmware      vfat        /dev/block/bootdevice/by-name/bluetooth      flags=display="Bluetooth";slotselect
+/firmware         vfat        /dev/block/bootdevice/by-name/modem        flags=display="Firmware";slotselect
+
+# Removable storage
+/external_sd      auto        /dev/block/mmcblk0p1  /dev/block/mmcblk0    flags=display="Micro SD Card";storage;wipeingui;removable
+/usb-otg          vfat        /dev/block/sdg1       /dev/block/sdg           flags=fsflags=utf8;display="USB-OTG";storage;wipeingui;removable
+
+# Dyanmic Partitions
+system           ext4       /system                                            display="System"
+system_ext       ext4      /system_ext                                       display="System_ext" 
+vendor           ext4       /vendor                                            display="Vendor"
+product          ext4       /product                                           display="Product"
