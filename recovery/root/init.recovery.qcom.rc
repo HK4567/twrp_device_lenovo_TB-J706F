@@ -29,13 +29,12 @@ import /init.recovery.qcom_decrypt.rc
 
 on boot
     start health-hal-2-1
+    setprop sys.usb.config adb
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-
-on post-fs
     start boot-hal-1-1
 
 on property:ro.crypto.type=file
