@@ -53,7 +53,6 @@ BOARD_KERNEL_CMDLINE := \
         androidboot.console=ttyMSM0 \
         androidboot.memcg=1 \
         lpm_levels.sleep_disabled=1 \
-        firmware_class.path=/vendor/firmware_mnt/image \
         video=vfb:640x400,bpp=32,memsize=3072000 \
         msm_rtb.filter=0x237 \
         service_locator.enable=1 \
@@ -147,7 +146,9 @@ TW_EXCLUDE_DEFAULT_USB_INIT := true
 TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 80
+TW_DEFAULT_BRIGHTNESS := 120
+TW_Y_OFFSET := 0
+TW_H_OFFSET := 0
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 TW_NO_SCREEN_BLANK := true
@@ -182,6 +183,7 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 
 # Encryption
 PLATFORM_VERSION := 11.0
+PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 BOARD_USES_QCOM_FBE_DECRYPTION := true

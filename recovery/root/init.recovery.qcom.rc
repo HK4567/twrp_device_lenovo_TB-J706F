@@ -27,6 +27,15 @@
 
 import /init.recovery.qcom_decrypt.rc
 
+on init
+    write /sys/class/backlight/panel0-backlight/brightness 200
+    start boot-hal-1-1
+    start qseecomd
+
+    # Create location for fs_mgr to store abbreviated output from filesystem
+    # checker programs.
+    mkdir /dev/fscklogs 0770 root system
+
 on boot
     setprop sys.usb.config adb
 
@@ -34,8 +43,7 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-    start boot-hal-1-0
 
-on property:ro.crypto.type=file
-    setprop ro.crypto.state encrypted
-    setprop twrp.apex.loaded true
+    # Set fscklog permission
+    chown root system /dev/fscklogs/log
+    chmod 0770 /dev/fscklogs/log
