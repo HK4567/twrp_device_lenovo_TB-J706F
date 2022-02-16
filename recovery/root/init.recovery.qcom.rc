@@ -37,4 +37,5 @@ on fs
 
 on property:twrp.modules.loaded=true
     start health-hal-2-1
+    start qseecomd
     setprop sys.usb.config mtp,adb
