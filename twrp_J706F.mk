@@ -17,15 +17,12 @@
 $(call inherit-product, device/lenovo/J706F/device.mk)
 $(call inherit-product, vendor/twrp/config/common.mk)
 
-# Inherit from common AOSP config
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
-
 # Release name
 PRODUCT_RELEASE_NAME := J706F
 
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := J706F
 PRODUCT_NAME := twrp_J706F
-PRODUCT_BRAND := Lenovo
-PRODUCT_MODEL := Lenovo TB-J706F
-PRODUCT_MANUFACTURER := Lenovo
+PRODUCT_BRAND := lenovo
+PRODUCT_MODEL := lenovo TB-J706F
+PRODUCT_MANUFACTURER := lenovo

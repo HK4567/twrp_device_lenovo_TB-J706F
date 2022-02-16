@@ -31,14 +31,10 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-
     # Set fscklog permission
     chown root system /dev/fscklogs/log
     chmod 0770 /dev/fscklogs/log
 
-on post-fs
-    start boot-hal-1-1
-
-on boot
+on property:twrp.modules.loaded=true
     start health-hal-2-1
-    setprop sys.usb.config adb
+    setprop sys.usb.config mtp,adb
