@@ -36,9 +36,9 @@ on fs
     chown root system /dev/fscklogs/log
     chmod 0770 /dev/fscklogs/log
 
+on post-fs
+    start boot-hal-1-1
+
 on boot
     start health-hal-2-1
     setprop sys.usb.config adb
-
-on post-fs
-    start boot-hal-1-1

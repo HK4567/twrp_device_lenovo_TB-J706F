@@ -3,3 +3,5 @@ ro.product.board=sm6150
 ro.board.platform=sm6150
 ro.adb.secure=0
 fbe.metadata.wrappedkey=true
+ro.product.first_api_level=30
+ro.virtual_ab.enabled=true
