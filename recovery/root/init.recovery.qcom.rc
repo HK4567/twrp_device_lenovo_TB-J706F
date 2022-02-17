@@ -29,6 +29,8 @@ import /init.recovery.qcom_decrypt.rc
 
 on init
     write /sys/class/backlight/panel0-backlight/brightness 200
+    setprop prepdecrypt.loglevel 2
+    setprop prepdecrypt.setpatch true
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
@@ -39,7 +41,7 @@ on boot
     start health-hal-2-1
 
 on post-fs
-    start boot-hal-1-1
+    start boot-hal-1-0
 
 on property:twrp.modules.loaded=true
     # Load ADSP firmware for PMIC
