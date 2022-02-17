@@ -29,6 +29,7 @@ import /init.recovery.qcom_decrypt.rc
 
 on boot
     start qseecomd
+    start qseecomd-service
     setprop sys.usb.config adb
 
 on fs
