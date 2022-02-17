@@ -27,18 +27,23 @@
 
 import /init.recovery.qcom_decrypt.rc
 
-on boot
-    start qseecomd
-    start qseecomd-service
-    setprop sys.usb.config adb
+on init
+    write /sys/class/backlight/panel0-backlight/brightness 200
 
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
-    # Set fscklog permission
-    chown root system /dev/fscklogs/log
-    chmod 0770 /dev/fscklogs/log
+
+on boot
+    start health-hal-2-1
+
+on post-fs
+    start boot-hal-1-1
 
 on property:twrp.modules.loaded=true
-    start health-hal-2-1
+    # Load ADSP firmware for PMIC
+    wait /sys/kernel/boot_adsp/boot
+    write /sys/kernel/boot_adsp/boot 1
+    wait /sys/class/power_supply/battery
+    umount /firmware
