@@ -1,6 +1,6 @@
 soong_namespace {
     imports: [
-		"hardware/qcom-caf/bootctrl",
+		"hardware/qcom/bootctrl",
 		"device/qcom/common/gpt-utils",
 	],
 }

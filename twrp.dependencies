@@ -1,9 +1,9 @@
 [
   {
-    "remote": "LineageOS",
-    "repository": "android_hardware_qcom_bootctrl",
-    "target_path": "hardware/qcom-caf/bootctrl",
-    "branch": "lineage-18.1-caf"
+    "remote": "TeamWin",
+    "repository": "android_device_qcom_common",
+    "target_path": "device/qcom/common",
+    "revision": "android-11"
   },
   {
     "remote": "TeamWin",
