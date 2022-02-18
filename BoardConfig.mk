@@ -60,8 +60,10 @@ BOARD_KERNEL_CMDLINE := \
         androidboot.usbcontroller=a600000.dwc3 \
         earlycon=msm_geni_serial,0x880000 \
         loop.max_part=7
+# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
+
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -71,11 +73,13 @@ BOARD_KERNEL_OFFSET              := 0x00008000
 BOARD_KERNEL_SECOND_OFFSET    := 0x00f00000
 BOARD_RAMDISK_OFFSET             := 0x01000000
 BOARD_DTB_OFFSET                  := 0x01f00000
+
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 TARGET_KERNEL_ARCH := arm64
 BOARD_INCLUDE_RECOVERY_DTBO := true
+
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
@@ -143,18 +147,15 @@ RECOVERY_SDCARD_ON_DATA := true
 TARGET_RECOVERY_QCOM_RTC_FIX := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_EXCLUDE_DEFAULT_USB_INIT := true
+TW_NO_SCREEN_BLANK := true
 TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 120
-TW_Y_OFFSET := 0
-TW_H_OFFSET := 0
+TW_Y_OFFSET := 10
+TW_H_OFFSET := -10
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TW_NO_SCREEN_BLANK := true
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
 TW_OVERRIDE_SYSTEM_PROPS := \
     "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
 
@@ -183,15 +184,18 @@ TW_RECOVERY_ADDITIONAL_RELINK_LIBRARY_FILES += \
 
 # Encryption
 PLATFORM_VERSION := 11.0
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
-BOARD_USES_QCOM_FBE_DECRYPTION := true
+TW_INCLUDE_CRYPTO := true
+TW_INCLUDE_CRYPTO_FBE := true
+TW_INCLUDE_FBE_METADATA_DECRYPT := true
 BOARD_USES_METADATA_PARTITION := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # Extras
 TW_EXCLUDE_TWRPAPP := true
 TW_HAS_EDL_MODE := true
+TW_EXCLUDE_SUPERSU := true
 TW_USE_TOOLBOX := true
 TW_INCLUDE_NTFS_3G := true
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop

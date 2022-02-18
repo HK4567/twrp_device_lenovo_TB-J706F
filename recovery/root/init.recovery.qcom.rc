@@ -37,15 +37,30 @@ on fs
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
 
+    #
+    # 设置qseecomd所需设备的权限
+    #
+    chmod 0660 /dev/qseecom
+    chown system drmrpc /dev/qseecom
+    chmod 0664 /dev/ion
+    chown system system /dev/ion
+
 on boot
     start health-hal-2-1
 
 on post-fs
     start boot-hal-1-0
 
-on property:twrp.modules.loaded=true
-    # Load ADSP firmware for PMIC
-    wait /sys/kernel/boot_adsp/boot
-    write /sys/kernel/boot_adsp/boot 1
-    wait /sys/class/power_supply/battery
-    umount /firmware
+on property:ro.crypto.state=encrypted
+    stop qseecomd
+    start qseecomd
+
+#
+# qseecomd 的服务项
+# 设置为随TWRP启动而自动启动
+#
+service qseecomd /system/bin/qseecomd
+    user root
+    group root
+    seclabel u:r:recovery:s0
+
