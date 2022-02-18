@@ -18,4 +18,6 @@ PRODUCT_MAKEFILES := \
     $(LOCAL_DIR)/twrp_J706F.mk
 
 COMMON_LUNCH_CHOICES := \
-     twrp_J706F-eng
+    twrp_J706F-user \
+    twrp_J706F-userdebug \
+    twrp_J706F-eng

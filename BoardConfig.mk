@@ -22,9 +22,11 @@
 # *not* include it on all devices, so it is safe even with hardware-specific
 # components.
 
-ALLOW_MISSING_DEPENDENCIES := true
 
 DEVICE_PATH := device/lenovo/J706F
+
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -42,6 +44,9 @@ TARGET_2ND_CPU_VARIANT := cortex-a73
 # Enable CPUSets
 ENABLE_CPUSETS := true
 ENABLE_SCHEDBOOST := true
+
+# GPT Utils
+BOARD_PROVIDES_GPTUTILS := true
 
 # Bootloader
 TARGET_BOOTLOADER_BOARD_NAME := sm6150
@@ -62,10 +67,6 @@ BOARD_KERNEL_CMDLINE := \
         androidboot.usbcontroller=a600000.dwc3 \
         earlycon=msm_geni_serial,0x880000 \
         loop.max_part=7
-# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
-BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
-BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
-
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -75,13 +76,11 @@ BOARD_KERNEL_OFFSET              := 0x00008000
 BOARD_KERNEL_SECOND_OFFSET    := 0x00f00000
 BOARD_RAMDISK_OFFSET             := 0x01000000
 BOARD_DTB_OFFSET                  := 0x01f00000
-
 TARGET_PREBUILT_DTB := $(DEVICE_PATH)/prebuilt/dtb.img
 TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/prebuilt/Image.gz
 BOARD_PREBUILT_DTBOIMAGE := $(DEVICE_PATH)/prebuilt/dtbo.img
 TARGET_KERNEL_ARCH := arm64
 BOARD_INCLUDE_RECOVERY_DTBO := true
-
 BOARD_MKBOOTIMG_ARGS += --base $(BOARD_KERNEL_BASE)
 BOARD_MKBOOTIMG_ARGS += --dtb $(TARGET_PREBUILT_DTB)
 BOARD_MKBOOTIMG_ARGS += --dtb_offset $(BOARD_DTB_OFFSET)
@@ -96,9 +95,6 @@ BOARD_MKBOOTIMG_ARGS += --header_version $(BOARD_KERNEL_HEADER_VERSION)
 TARGET_BOARD_PLATFORM := sm6150
 TARGET_BOARD_PLATFORM_GPU := qcom-adreno618
 QCOM_BOARD_PLATFORMS += sm6150
-
-# GPT Utils
-BOARD_PROVIDES_GPTUTILS := true
 
 # Partitions
 BOARD_FLASH_BLOCK_SIZE := 262144
@@ -156,8 +152,6 @@ TW_Y_OFFSET := 10
 TW_H_OFFSET := -10
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -198,19 +192,20 @@ TW_INCLUDE_CRYPTO := true
 TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 BOARD_USES_METADATA_PARTITION := true
+BOARD_USES_QCOM_FBE_DECRYPTION := true
 BOARD_SUPPRESS_SECURE_ERASE := true
+PRODUCT_ENFORCE_VINTF_MANIFEST := true
 
 # Tool
 TW_INCLUDE_REPACKTOOLS := true
 TW_INCLUDE_RESETPROP := true
+TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Extras
 TW_EXCLUDE_TWRPAPP := true
 TW_HAS_EDL_MODE := true
-TW_EXCLUDE_SUPERSU := true
 TW_USE_TOOLBOX := true
 TW_INCLUDE_NTFS_3G := true
-TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
 
 # Asian region languages
 TW_EXTRA_LANGUAGES := true
@@ -219,3 +214,6 @@ TW_DEFAULT_LANGUAGE := zh_CN
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
+TARGET_RECOVERY_DEVICE_MODULES += debuggerd
+TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
+BOARD_RAMDISK_USE_LZMA := true
