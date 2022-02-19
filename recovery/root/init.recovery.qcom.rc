@@ -56,7 +56,7 @@ on boot
     start vendor.qti.vibrator
     setprop sys.usb.config adb
 
-service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
+service vendor.qti.vibrator /system/bin/vendor.qti.hardware.vibrator.service
     class hal
     user system
     group system input
