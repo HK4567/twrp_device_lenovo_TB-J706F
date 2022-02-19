@@ -32,9 +32,12 @@ on init
     # Create location for fs_mgr to store abbreviated output from filesystem
     # checker programs.
     mkdir /dev/fscklogs 0770 root system
+    start hwservicemanager
+    start servicemanager
+    setprop crypto.ready 1
 
 on fs
-    export LD_LIBRARY_PATH /sbin:/vendor/lib64:/vendor/lib64/hw
+    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     # Set fscklog permission
@@ -45,19 +48,49 @@ on fs
 on early-fs
     start vold
 
-on init
-    start hwservicemanager
-    setprop crypto.ready 1
-    setprop sys.listeners.registered=true
-    setprop vendor.sys.listeners.registered=true
-
 on boot
     start health-hal-2-1
     start vendor.qti.vibrator
+    start vendor.qseecom-1-0
+    start atrace-1-0
+    start suspend-1-0
     setprop sys.usb.config adb
+
+service hwservicemanager /system/bin/hwservicemanager
+    user root
+    group root
+    disabled
+    onrestart setprop hwservicemanager.ready false
+    seclabel u:r:recovery:s0
+ 
+service servicemanager /system/bin/servicemanager
+    user root
+    group root readproc
+    disabled
+    seclabel u:r:recovery:s0
 
 service vendor.qti.vibrator /system/bin/vendor.qti.hardware.vibrator.service
     class hal
     user system
     group system input
+    seclabel u:r:recovery:s0
+
+service vendor.qseecom-1-0 /system/bin/vendor.qti.hardware.qseecom@1.0-service
+    class hal
+    user system
+    group system input
+    seclabel u:r:recovery:s0
+
+service atrace-1-0 /system/bin/android.hardware.atrace@1.0-service
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
+
+service suspend-1-0 /system/bin/android.system.suspend@1.0-service
+    user root
+    group root
+    disabled
+    oneshot
     seclabel u:r:recovery:s0
