@@ -42,6 +42,20 @@ on fs
     chmod 0770 /dev/fscklogs/log
     start boot-hal-1-1
 
+on early-fs
+    start vold
+
+on init
+    start hwservicemanager
+    setprop crypto.ready 1
+
 on boot
     start health-hal-2-1
+    start vendor.qti.vibrator
     setprop sys.usb.config adb
+
+service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service
+    class hal
+    user system
+    group system input
+    seclabel u:r:recovery:s0
