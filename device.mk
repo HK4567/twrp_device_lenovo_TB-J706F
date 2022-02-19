@@ -81,9 +81,9 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-# Apex libraries
-PRODUCT_COPY_FILES += \
-    libandroidicu.so
+# Recovery Modules
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu
 
 # OEM otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
