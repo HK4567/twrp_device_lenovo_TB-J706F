@@ -48,13 +48,15 @@ on early-fs
 on init
     start hwservicemanager
     setprop crypto.ready 1
+    setprop sys.listeners.registered=true
+    setprop vendor.sys.listeners.registered=true
 
 on boot
     start health-hal-2-1
     start vendor.qti.vibrator
     setprop sys.usb.config adb
 
-service vendor.qti.vibrator /vendor/bin/hw/vendor.qti.hardware.vibrator.service
+service vendor.qti.vibrator /system/bin/hw/vendor.qti.hardware.vibrator.service
     class hal
     user system
     group system input
