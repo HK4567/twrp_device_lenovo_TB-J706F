@@ -1,0 +1,7 @@
+# Crypto
+ro.crypto.allow_encrypt_override=true
+ro.crypto.dm_default_key.options_format.version=1
+ro.crypto.volume.filenames_mode=ice
+
+# Gatekeeper
+vendor.gatekeeper.disable_spu=true
