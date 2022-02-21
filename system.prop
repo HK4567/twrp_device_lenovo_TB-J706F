@@ -2,4 +2,3 @@ ro.display.series=lenovo TB-J706F
 ro.product.board=sm6150
 ro.board.platform=sm6150
 ro.adb.secure=0
-ro.product.first_api_level=30
