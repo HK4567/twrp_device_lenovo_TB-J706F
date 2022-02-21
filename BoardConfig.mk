@@ -66,7 +66,12 @@ BOARD_KERNEL_CMDLINE := \
         swiotlb=1 \
         androidboot.usbcontroller=a600000.dwc3 \
         earlycon=msm_geni_serial,0x880000 \
-        loop.max_part=7
+        loop.max_part=7 \
+        androidboot.boot_devices=soc/1d84000.ufshc \
+        firmware_class.path=/vendor/firmware_mnt/image
+# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
+BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -110,6 +115,8 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
+TARGET_COPY_OUT_PRODUCT := product
+BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
 
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
@@ -194,13 +201,12 @@ TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 BOARD_USES_METADATA_PARTITION := true
 BOARD_USES_QCOM_FBE_DECRYPTION := true
-BOARD_SUPPRESS_SECURE_ERASE := true
+#BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Tool
 #TW_INCLUDE_REPACKTOOLS := true
 TW_INCLUDE_RESETPROP := true
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-TARGET_VENDOR_PROP += $(DEVICE_PATH)/vendor.prop
 
 # Extras
 TW_EXCLUDE_TWRPAPP := true
