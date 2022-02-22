@@ -28,14 +28,13 @@
 import /init.recovery.qcom_decrypt.rc
  
 on init
-    write /sys/class/backlight/panel0-backlight/brightness 200
- 
+    start boot-hal-1-1
+
     # Create location for fs_mgr to store abbreviated output from filesystem
     # checker programs.
     mkdir /dev/fscklogs 0770 root system
  
 on fs
-    export LD_LIBRARY_PATH /system/lib64:/vendor/lib64:/vendor/lib64/hw
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
  
@@ -45,6 +44,4 @@ on fs
  
 on boot
     start health-hal-2-1
- 
-on post-fs
-    start boot-hal-1-1
+    setprop sys.usb.config adb
