@@ -79,10 +79,6 @@ PRODUCT_PACKAGES += \
     qcom_decrypt \
     qcom_decrypt_fbe
 
-# Recovery Modules
-PRODUCT_HOST_PACKAGES += \
-    libandroidicu
-
 # OEM otacert
 PRODUCT_EXTRA_RECOVERY_KEYS += \
     $(LOCAL_PATH)/security/releasekey

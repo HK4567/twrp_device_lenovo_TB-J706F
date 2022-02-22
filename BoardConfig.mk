@@ -127,9 +127,9 @@ BOARD_SUPER_PARTITION_GROUPS := qti_dynamic_partitions
 BOARD_QTI_DYNAMIC_PARTITIONS_SIZE := 6442450944
 BOARD_QTI_DYNAMIC_PARTITIONS_PARTITION_LIST := \
       system \
+      system_ext \
       vendor \
-      product \
-      system_ext
+      product
 
 # Partitions (listed in the file) to be wiped under recovery.
 TARGET_RECOVERY_FSTAB := $(DEVICE_PATH)/recovery/root/system/etc/recovery.fstab
@@ -224,5 +224,3 @@ TW_DEFAULT_LANGUAGE := zh_CN
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
-TARGET_RECOVERY_DEVICE_MODULES += debuggerd
-TW_RECOVERY_ADDITIONAL_RELINK_FILES += $(TARGET_OUT_EXECUTABLES)/debuggerd
