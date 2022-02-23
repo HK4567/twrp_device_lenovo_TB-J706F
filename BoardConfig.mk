@@ -159,8 +159,8 @@ TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 120
-TW_Y_OFFSET := 10
-TW_H_OFFSET := -10
+TW_Y_OFFSET := 1
+TW_H_OFFSET := -1
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
 
@@ -198,13 +198,9 @@ TW_INCLUDE_CRYPTO_FBE := true
 TW_INCLUDE_FBE_METADATA_DECRYPT := true
 BOARD_USES_METADATA_PARTITION := true
 BOARD_USES_QCOM_FBE_DECRYPTION := true
-
-#---------------------------------------------------#
 PRODUCT_ENFORCE_VINTF_MANIFEST := true
-#---------------------------------------------------#
 
 # Tool
-#TW_INCLUDE_REPACKTOOLS := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_NTFS_3G := true
 
