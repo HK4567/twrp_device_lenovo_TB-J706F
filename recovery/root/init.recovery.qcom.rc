@@ -34,9 +34,4 @@ on boot
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-setprop ro.board.platform sm6150
     start boot-hal-1-1
-
-on property:ro.crypto.type=file
-    setprop ro.crypto.state encrypted
-    setprop twrp.apex.loaded true
