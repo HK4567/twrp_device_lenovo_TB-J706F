@@ -38,6 +38,10 @@ on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
+# We need vold early for metadata encryption
+on early-fs
+    start vold
+
 on boot
     start health-hal-2-1
     setprop sys.usb.config adb
