@@ -26,22 +26,17 @@
 #
 
 import /init.recovery.qcom_decrypt.rc
- 
-on init
-    start boot-hal-1-1
-
-    # Create location for fs_mgr to store abbreviated output from filesystem
-    # checker programs.
-    mkdir /dev/fscklogs 0770 root system
- 
-on fs
-    wait /dev/block/platform/soc/${ro.boot.bootdevice}
-    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
-
-# We need vold early for metadata encryption
-on early-fs
-    start vold
 
 on boot
     start health-hal-2-1
     setprop sys.usb.config adb
+
+on fs
+    wait /dev/block/platform/soc/${ro.boot.bootdevice}
+    symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
+setprop ro.board.platform sm6150
+    start boot-hal-1-1
+
+on property:ro.crypto.type=file
+    setprop ro.crypto.state encrypted
+    setprop twrp.apex.loaded true

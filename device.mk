@@ -14,10 +14,6 @@
 # limitations under the License.
 #
 
-
-# Inherit from common AOSP config
-$(call inherit-product, $(SRC_TARGET_DIR)/product/base.mk)
- 
 LOCAL_PATH := device/lenovo/J706F
 
 # define hardware platform
@@ -53,13 +49,20 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-# API
-PRODUCT_SHIPPING_API_LEVEL := 30
+AB_OTA_POSTINSTALL_CONFIG += \
+    RUN_POSTINSTALL_vendor=true \
+    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
+    FILESYSTEM_TYPE_vendor=ext4 \
+    POSTINSTALL_OPTIONAL_vendor=true
+ 
+# Userdata Checkpointing OTA GC
+PRODUCT_PACKAGES += \
+    checkpoint_gc
 
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-impl \
-    android.hardware.boot@1.1-impl.recovery \
+    android.hardware.boot@1.1-impl-qti \
+    android.hardware.boot@1.1-imp-qtil.recovery \
     android.hardware.boot@1.1-service \
     bootctrl.$(PRODUCT_PLATFORM) \
     bootctrl.$(PRODUCT_PLATFORM).recovery
@@ -67,15 +70,20 @@ PRODUCT_PACKAGES += \
 # tell update_engine to not change dynamic partition table during updates
 # needed since our qti_dynamic_partitions does not include
 # vendor and odm and we also dont want to AB update them
-TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
+#TARGET_ENFORCE_AB_OTA_PARTITION_LIST := true
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
 
+# Recovery Modules
+PRODUCT_HOST_PACKAGES += \
+    libandroidicu
+
 # fastbootd
 PRODUCT_PACKAGES += \
     android.hardware.fastboot@1.0-impl-mock \
-    fastbootd
+    fastbootd \
+    resetprop
 
 # qcom decryption
 PRODUCT_PACKAGES += \

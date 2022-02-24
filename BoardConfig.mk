@@ -1,32 +1,22 @@
 #
-# Copyright 2017 The Android Open Source Project
+# Copyright (C) 2020 The Android Open Source Project
+# Copyright (C) 2020 The TWRP Open Source Project
+# Copyright (C) 2020 SebaUbuntu's TWRP device tree generator
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#      http://www.apache.org/licenses/LICENSE-2.0
+#     http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# 
-# This contains the module build definitions for the hardware-specific
-# components for this device.
 #
-# As much as possible, those components should be built unconditionally,
-# with device-specific names to avoid collisions, to avoid device-specific
-# bitrot and build breakages. Building a component unconditionally does
-# *not* include it on all devices, so it is safe even with hardware-specific
-# components.
-
 
 DEVICE_PATH := device/lenovo/J706F
-
-# For building with minimal manifest
-ALLOW_MISSING_DEPENDENCIES := true
 
 # Architecture
 TARGET_ARCH := arm64
@@ -66,12 +56,10 @@ BOARD_KERNEL_CMDLINE := \
         swiotlb=1 \
         androidboot.usbcontroller=a600000.dwc3 \
         earlycon=msm_geni_serial,0x880000 \
-        loop.max_part=7 \
-        androidboot.boot_devices=soc/1d84000.ufshc \
-        firmware_class.path=/vendor/firmware_mnt/image
-# For the love of all that is holy, please do not include this in your ROM unless you really want TWRP to not work correctly!
+        loop.max_part=7
 BOARD_KERNEL_CMDLINE += androidboot.fastboot=1
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+
 BOARD_KERNEL_IMAGE_NAME := Image.gz
 BOARD_KERNEL_PAGESIZE := 4096
 BOARD_KERNEL_HEADER_VERSION := 2
@@ -115,11 +103,7 @@ BOARD_BUILD_SYSTEM_ROOT_IMAGE := false
 
 # Workaround for error copying vendor files to recovery ramdisk
 BOARD_VENDORIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_PRODUCTIMAGE_FILE_SYSTEM_TYPE := ext4
-BOARD_SYSTEM_EXTIMAGE_FILE_SYSTEM_TYPE := ext4
 TARGET_COPY_OUT_VENDOR := vendor
-TARGET_COPY_OUT_PRODUCT := product
-TARGET_COPY_OUT_SYSTEM_EXT := system_ext
 
 # Dynamic partition size = (Super partition size / 2) - 4MB 
 BOARD_SUPER_PARTITION_SIZE := 12884901888
@@ -140,9 +124,9 @@ TARGET_RECOVERY_WIPE := $(DEVICE_PATH)/recovery/root/system/etc/recovery.wipe
 # Recovery
 BOARD_HAS_LARGE_FILESYSTEM := true
 BOARD_HAS_NO_SELECT_BUTTON := true
-BOARD_SUPPRESS_SECURE_ERASE := true
 TARGET_USERIMAGES_USE_EXT4 := true
 TARGET_USERIMAGES_USE_F2FS := true
+#BOARD_SUPPRESS_SECURE_ERASE := true
 
 # 16:10 Screen
 TARGET_SCREEN_WIDTH := 2560
@@ -160,7 +144,8 @@ TW_NO_SCREEN_BLANK := true
 TW_THEME := portrait_hdpi
 TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_MAX_BRIGHTNESS := 255
-TW_DEFAULT_BRIGHTNESS := 120
+TW_DEFAULT_BRIGHTNESS := 150
+TW_INCLUDE_NTFS_3G := true
 TW_Y_OFFSET := 1
 TW_H_OFFSET := -1
 TW_INPUT_BLACKLIST := "hbtp_vm"
@@ -199,26 +184,19 @@ BOARD_AVB_VBMETA_SYSTEM_ROLLBACK_INDEX_LOCATION := 1
 
 # Encryption
 PLATFORM_VERSION := 11
-PLATFORM_VERSION_LAST_STABLE := $(PLATFORM_VERSION)
 PLATFORM_SECURITY_PATCH := 2099-12-31
 VENDOR_SECURITY_PATCH := 2099-12-31
 BOARD_USES_METADATA_PARTITION := true
 BOARD_USES_QCOM_FBE_DECRYPTION := true
 
 # Crypto
-TW_INCLUDE_CRYPTO := true
-TW_INCLUDE_CRYPTO_FBE := true
-TW_INCLUDE_FBE_METADATA_DECRYPT := true
+#TW_INCLUDE_CRYPTO := true
+#TW_INCLUDE_CRYPTO_FBE := true
+#TW_INCLUDE_FBE_METADATA_DECRYPT := true
 
 # Tool
 TW_INCLUDE_RESETPROP := true
-TW_INCLUDE_NTFS_3G := true
-
 TARGET_SYSTEM_PROP += $(DEVICE_PATH)/system.prop
-TW_OVERRIDE_SYSTEM_PROPS := \
-    "ro.build.product;ro.build.fingerprint=ro.system.build.fingerprint;ro.build.version.incremental;ro.product.device=ro.product.system.device;ro.product.model=ro.product.system.model;ro.product.name=ro.product.system.name"
-
-# Extras
 TW_EXCLUDE_TWRPAPP := true
 TW_HAS_EDL_MODE := true
 TW_USE_TOOLBOX := true
@@ -230,3 +208,6 @@ TW_DEFAULT_LANGUAGE := zh_CN
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
 TWRP_INCLUDE_LOGCAT := true
+
+# For building with minimal manifest
+ALLOW_MISSING_DEPENDENCIES := true

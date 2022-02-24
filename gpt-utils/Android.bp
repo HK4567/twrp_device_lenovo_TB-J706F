@@ -16,6 +16,20 @@
 
 cc_library {
     name: "libgptutils.lenovo_J706F",
-    defaults: ["libgptutils_defaults"],
-    vendor_available: true,
+    vendor: true,
+    recovery_available: true,
+    shared_libs: [
+        "libcutils",
+        "liblog",
+        "libz",
+    ],
+    cflags: [
+        "-Wall",
+        "-Werror",
+    ],
+    srcs: [
+        "gpt-utils.cpp",
+    ],
+    owner: "qti",
+    export_include_dirs: ["."],
 }
