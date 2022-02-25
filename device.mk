@@ -19,6 +19,9 @@ LOCAL_PATH := device/lenovo/J706F
 # define hardware platform
 PRODUCT_PLATFORM := sm6150
 
+# SHIPPING API
+PRODUCT_SHIPPING_API_LEVEL := 29
+
 # A/B support
 AB_OTA_UPDATER := true
 
