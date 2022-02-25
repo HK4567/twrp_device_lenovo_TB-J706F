@@ -32,8 +32,8 @@ on boot
     setprop sys.usb.config adb
 
 #######################################
-    chmod 0777 /system/bin/log.sh         ##
-    start log                                   ##
+    chmod 0777 /system/bin/log.sh     ##
+    start log                           ##
 #######################################
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
