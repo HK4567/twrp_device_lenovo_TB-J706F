@@ -52,21 +52,13 @@ AB_OTA_POSTINSTALL_CONFIG += \
     FILESYSTEM_TYPE_system=ext4 \
     POSTINSTALL_OPTIONAL_system=true
 
-AB_OTA_POSTINSTALL_CONFIG += \
-    RUN_POSTINSTALL_vendor=true \
-    POSTINSTALL_PATH_vendor=bin/checkpoint_gc \
-    FILESYSTEM_TYPE_vendor=ext4 \
-    POSTINSTALL_OPTIONAL_vendor=true
- 
-# Userdata Checkpointing OTA GC
-PRODUCT_PACKAGES += \
-    checkpoint_gc
-
 # Boot control HAL
 PRODUCT_PACKAGES += \
-    android.hardware.boot@1.1-impl-qti \
-    android.hardware.boot@1.1-imp-qtil.recovery \
-    android.hardware.boot@1.1-service \
+    android.hardware.boot@1.0-impl \
+    android.hardware.boot@1.0-imp.recovery \
+    android.hardware.boot@1.0-impl-wrapper.recovery \
+    android.hardware.boot@1.0-impl-wrapper \
+    android.hardware.boot@1.0-service \
     bootctrl.$(PRODUCT_PLATFORM) \
     bootctrl.$(PRODUCT_PLATFORM).recovery
 
@@ -77,10 +69,6 @@ PRODUCT_PACKAGES += \
 
 # Dynamic partitions
 PRODUCT_USE_DYNAMIC_PARTITIONS := true
-
-# Recovery Modules
-PRODUCT_HOST_PACKAGES += \
-    libandroidicu
 
 # fastbootd
 PRODUCT_PACKAGES += \
