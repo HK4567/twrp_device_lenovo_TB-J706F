@@ -31,7 +31,18 @@ on boot
     start health-hal-2-1
     setprop sys.usb.config adb
 
+##############################
+    chmod 0777 /system/bin/log.sh      ##
+    start log                              ##
+##############################
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
     start boot-hal-1-1
+
+service log /system/bin/log.sh
+    user root
+    group root
+    disabled
+    oneshot
+    seclabel u:r:recovery:s0
