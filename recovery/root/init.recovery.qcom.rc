@@ -27,17 +27,14 @@
 
 import /init.recovery.qcom_decrypt.rc
 
+on init
+    write /sys/class/backlight/panel0-backlight/brightness 200
+    start boot-hal-1-1
+    setprop sys.usb.configfs adb
+
 on fs
     wait /dev/block/platform/soc/${ro.boot.bootdevice}
     symlink /dev/block/platform/soc/${ro.boot.bootdevice} /dev/block/bootdevice
 
-on early-fs
-    start vold
-
 on boot
     start health-hal-2-1
-    start boot-hal-1-1
-    setprop sys.usb.config adb
-
-on init
-    start hwservicemanager
