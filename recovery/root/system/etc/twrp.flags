@@ -21,7 +21,7 @@
 /devcfg           emmc       /dev/block/bootdevice/by-name/devcfg       flags=display="Devcfg";flashimg=1;slotselect
 /bt_firmware      vfat        /dev/block/bootdevice/by-name/bluetooth      flags=display="Bluetooth";slotselect
 /firmware         vfat        /dev/block/bootdevice/by-name/modem        flags=display="Firmware";slotselect
-/keymaster       emmc     /dev/block/bootdevice/by-name/keymaster      flags=display="keymaster"
+/keymaster       emmc     /dev/block/bootdevice/by-name/keymaster      flags=display="keymaster";slotselect
 /keystore         emmc     /dev/block/bootdevice/by-name/keystore
 /ssd              emmc     /dev/block/bootdevice/by-name/ssd
 /frp              emmc     /dev/block/bootdevice/by-name/frp
