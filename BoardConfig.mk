@@ -206,6 +206,7 @@ TW_USE_TOOLBOX := true
 # Asian region languages
 TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := zh_CN
+TW_DEVICE_VERSION := TB-J706F by_HK4567_9.3
 
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
