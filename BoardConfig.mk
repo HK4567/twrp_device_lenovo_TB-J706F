@@ -148,6 +148,7 @@ TW_Y_OFFSET := 1
 TW_H_OFFSET := -1
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
+BOARD_HAS_FLIPPED_SCREEN := true
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
@@ -206,7 +207,7 @@ TW_USE_TOOLBOX := true
 # Asian region languages
 TW_EXTRA_LANGUAGES := true
 TW_DEFAULT_LANGUAGE := zh_CN
-TW_DEVICE_VERSION := TB-J706F by_HK4567_9.3
+TW_DEVICE_VERSION := TB-J706F by HK4567_9.3
 
 # TWRP Debug Flags
 TARGET_USES_LOGD := true
