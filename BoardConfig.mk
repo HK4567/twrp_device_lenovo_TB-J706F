@@ -144,11 +144,11 @@ TARGET_RECOVERY_PIXEL_FORMAT := RGBX_8888
 TW_MAX_BRIGHTNESS := 255
 TW_DEFAULT_BRIGHTNESS := 150
 TW_INCLUDE_NTFS_3G := true
-TW_Y_OFFSET := 1
-TW_H_OFFSET := -1
+TW_Y_OFFSET := 0
+TW_H_OFFSET := 0
 TW_INPUT_BLACKLIST := "hbtp_vm"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := /config/usb_gadget/g1/functions/mass_storage.0/lun.%d/file
-BOARD_HAS_FLIPPED_SCREEN := true
+RECOVERY_TOUCHSCREEN_SWAP_XY := true
 
 # Additional binaries & libraries needed for recovery
 TARGET_RECOVERY_DEVICE_MODULES += \
